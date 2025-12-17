@@ -65,7 +65,7 @@ const TitleScreen = ({ onStart }: { onStart: () => void }) => {
             {/* Top Tag */}
             <div className="flex items-center gap-2 mb-4 animate-in slide-in-from-top-10 fade-in duration-1000">
                 <div className="h-px w-12 bg-yellow-500"></div>
-                <span className="text-yellow-400 font-mono tracking-[0.3em] text-xs md:text-sm drop-shadow-md">TOP SECRET MISSION</span>
+                <span className="text-yellow-400 font-mono tracking-[0.3em] text-xs md:text-sm drop-shadow-md">MISSION START</span>
                 <div className="h-px w-12 bg-yellow-500"></div>
             </div>
 
@@ -80,16 +80,16 @@ const TitleScreen = ({ onStart }: { onStart: () => void }) => {
             </div>
 
             <h1 
-                className="text-4xl md:text-7xl font-ops animate-shine drop-shadow-lg glitch-text leading-tight"
-                data-text="BANI ABBASIYAH"
+                className="text-3xl md:text-6xl font-ops animate-shine drop-shadow-lg glitch-text leading-tight"
+                data-text="AL-MUJADILAH: 11"
             >
-              BANI ABBASIYAH
+              AL-MUJADILAH: 11
             </h1>
             
             <div className="mt-8 transform -skew-x-12 bg-slate-900/80 border-l-4 border-yellow-500 px-8 py-2 relative overflow-hidden group">
                  <div className="absolute inset-0 bg-yellow-500/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                 <p className="text-slate-200 tracking-[0.5em] text-sm md:text-lg font-mono">
-                    OPERATION: GOLDEN AGE
+                 <p className="text-slate-200 tracking-[0.5em] text-xs md:text-lg font-mono">
+                    OPERATION: KNOWLEDGE & FAITH
                 </p>
             </div>
             
@@ -162,11 +162,11 @@ const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => 
         <div className="h-[100dvh] w-full bg-slate-900 flex flex-col items-center justify-center p-4">
              <div className="max-w-4xl w-full">
                 <h2 className="text-4xl font-ops text-white mb-8 text-center">PILIH TINGKAT OPERASI</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-y-auto max-h-[80vh] p-2">
                     {/* EASY */}
                     <button 
                         onClick={() => onSelect(Difficulty.EASY)}
-                        className="bg-slate-800 border-2 border-green-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden h-80 flex flex-col justify-between"
+                        className="bg-slate-800 border-2 border-green-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden min-h-[300px] flex flex-col justify-between"
                     >
                         <div className="absolute inset-0 bg-green-900/10 group-hover:bg-green-900/20 transition-colors"></div>
                         <div className="text-center">
@@ -183,12 +183,12 @@ const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => 
                     {/* MEDIUM */}
                     <button 
                         onClick={() => onSelect(Difficulty.MEDIUM)}
-                        className="bg-slate-800 border-2 border-yellow-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden h-80 flex flex-col justify-between"
+                        className="bg-slate-800 border-2 border-yellow-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden min-h-[300px] flex flex-col justify-between"
                     >
                         <div className="absolute inset-0 bg-yellow-900/10 group-hover:bg-yellow-900/20 transition-colors"></div>
                         <div className="text-center">
                              <Swords size={48} className="mx-auto text-yellow-500 mb-4" />
-                             <h3 className="text-2xl font-ops text-yellow-500">VETERAN</h3>
+                             <h3 className="text-2xl font-ops text-yellow-500">MENENGAH</h3>
                              <div className="text-slate-400 text-sm font-mono mt-2">TINGKAT SEDANG</div>
                         </div>
                         <p className="text-slate-300 text-sm text-center">Pemahaman konsep & hubungan sebab-akibat.</p>
@@ -200,12 +200,12 @@ const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => 
                     {/* HARD */}
                     <button 
                         onClick={() => onSelect(Difficulty.HARD)}
-                        className="bg-slate-800 border-2 border-red-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden h-80 flex flex-col justify-between"
+                        className="bg-slate-800 border-2 border-red-600 hover:bg-slate-700 hover:scale-105 transition-all p-6 rounded-lg group relative overflow-hidden min-h-[300px] flex flex-col justify-between"
                     >
                         <div className="absolute inset-0 bg-red-900/10 group-hover:bg-red-900/20 transition-colors"></div>
                         <div className="text-center">
                              <Brain size={48} className="mx-auto text-red-500 mb-4" />
-                             <h3 className="text-2xl font-ops text-red-500">ELITE</h3>
+                             <h3 className="text-2xl font-ops text-red-500">MAHIR</h3>
                              <div className="text-slate-400 text-sm font-mono mt-2">TINGKAT SULIT</div>
                         </div>
                         <p className="text-slate-300 text-sm text-center">Analisis tingkat tinggi (HOTS), refleksi & keputusan.</p>
@@ -221,31 +221,30 @@ const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => 
 
 const CharacterSelectScreen = ({ onSelect }: { onSelect: (charId: string) => void }) => {
     return (
-        <div className="h-[100dvh] w-full bg-slate-900 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-            {/* Background Image - Character Select - Opacity 50% */}
-            <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50" 
+        <div className="h-[100dvh] w-full bg-slate-900 flex flex-col relative overflow-hidden">
+            <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50 fixed" 
                 style={{ backgroundImage: "url('https://iili.io/fcuctVV.jpg')" }}>
             </div>
             
-            <div className="relative z-10 w-full flex flex-col items-center">
-                <h2 className="text-4xl font-ops text-white mb-8">PILIH PERAN</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full">
+            <div className="relative z-10 w-full flex flex-col items-center flex-grow overflow-y-auto p-3 pb-20">
+                <h2 className="text-xl md:text-4xl font-ops text-white mb-2 mt-2 text-center shrink-0">PILIH PERAN</h2>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 max-w-6xl w-full">
                     {CHARACTERS.map(char => (
                         <button 
                             key={char.id}
                             onClick={() => onSelect(char.id)}
-                            className="bg-slate-800/90 border-2 border-slate-600 hover:border-yellow-500 hover:bg-slate-700/90 transition-all p-4 rounded-lg flex flex-col items-center group relative overflow-hidden backdrop-blur-sm"
+                            className="bg-slate-800/90 border-2 border-slate-600 hover:border-yellow-500 hover:bg-slate-700/90 transition-all p-2 rounded-lg flex flex-col items-center group relative overflow-hidden backdrop-blur-sm min-h-[140px]"
                         >
                             <div className="absolute inset-0 bg-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <img 
                                 src={char.image} 
                                 alt={char.name} 
-                                className="w-32 h-32 mb-4 drop-shadow-lg filter grayscale group-hover:grayscale-0 transition-all"
+                                className="w-12 h-12 md:w-32 md:h-32 mb-1 md:mb-4 drop-shadow-lg filter grayscale group-hover:grayscale-0 transition-all object-contain"
                             />
-                            <h3 className="text-xl font-ops text-yellow-500">{char.name}</h3>
-                            <div className="text-slate-400 text-sm font-mono">{char.role}</div>
-                            <div className="mt-4 bg-black/40 px-3 py-1 rounded text-xs text-green-400 border border-green-900">
-                                KEUNIKAN: {char.perk}
+                            <h3 className="text-xs md:text-xl font-ops text-yellow-500 leading-tight">{char.name}</h3>
+                            <div className="text-slate-400 text-[9px] md:text-sm font-mono leading-tight">{char.role}</div>
+                            <div className="mt-1 bg-black/40 px-1 py-0.5 rounded text-[8px] md:text-xs text-green-400 border border-green-900 w-full truncate">
+                                PERK: {char.perk}
                             </div>
                         </button>
                     ))}
@@ -257,54 +256,36 @@ const CharacterSelectScreen = ({ onSelect }: { onSelect: (charId: string) => voi
 
 const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogout: () => void, onStartLevel: (id: number) => void }) => {
     const char = CHARACTERS.find(c => c.id === user.characterId) || CHARACTERS[0];
-
-    // Badge color based on difficulty
     const diffColor = user.difficulty === Difficulty.HARD ? 'text-red-500' : user.difficulty === Difficulty.MEDIUM ? 'text-yellow-500' : 'text-green-500';
 
     return (
   <div className="h-[100dvh] w-full bg-slate-900 flex flex-col overflow-hidden">
     {/* Top Bar */}
-    <div className="bg-slate-950 px-4 py-2 border-b border-slate-700 flex justify-between items-center z-10 shadow-lg shrink-0">
-      <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-slate-800 border border-yellow-500 rounded overflow-hidden">
+    <div className="bg-slate-950 px-3 py-2 border-b border-slate-700 flex justify-between items-center z-10 shadow-lg shrink-0 h-14">
+      <div className="flex items-center gap-2 md:gap-3">
+          <div className="w-8 h-8 md:w-10 md:h-10 bg-slate-800 border border-yellow-500 rounded overflow-hidden">
              <img src={char.image} alt="Avatar" className="w-full h-full object-cover" />
           </div>
-          <div>
-              <h3 className="font-ops text-white leading-none text-lg">{user.username}</h3>
-              <div className="flex gap-2 text-[10px] mt-0.5 items-center">
+          <div className="flex flex-col justify-center">
+              <h3 className="font-ops text-white leading-none text-xs md:text-lg">{user.username}</h3>
+              <div className="flex gap-2 text-[9px] items-center">
                   <RankBadge rank={user.rank} />
-                  <span className={`font-ops ${diffColor} border border-current px-1 rounded`}>{user.difficulty}</span>
+                  <span className={`font-ops ${diffColor} border border-current px-1 rounded hidden md:inline-block`}>{user.difficulty}</span>
               </div>
           </div>
       </div>
-      <button className="text-slate-400 hover:text-white flex items-center gap-2 text-sm" onClick={onLogout}>
+      <button className="text-slate-400 hover:text-white flex items-center gap-2 text-[10px] md:text-sm" onClick={onLogout}>
            <span className="font-ops">KELUAR</span>
       </button>
     </div>
 
-    {/* Map Content - Compact Grid to fit one screen but allow scroll if needed */}
+    {/* Map Content - Compact Grid */}
     <div className="flex-grow relative w-full flex flex-col min-h-0">
-       {/* Map Background - Opacity 50% */}
-       <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{ backgroundImage: "url('https://iili.io/fcuagyJ.jpg')" }}></div>
+       <div className="absolute inset-0 bg-cover bg-center opacity-50 fixed" style={{ backgroundImage: "url('https://iili.io/fcuagyJ.jpg')" }}></div>
        
-       {/* Scrollable Container for Levels */}
-       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col h-full overflow-y-auto p-2 md:p-4 scrollbar-hide">
-           
-           {/* HISTORY SCORE DISPLAY (Shown if user has replayed) */}
-           {user.lastScore !== undefined && user.lastScore > 0 && (
-                <div className="self-end mb-2 mr-2 animate-in slide-in-from-top-5">
-                    <div className="bg-slate-900/90 border border-slate-500 p-2 md:p-3 rounded-bl-xl shadow-xl flex items-center gap-3">
-                        <History className="text-slate-400" size={20} />
-                        <div>
-                            <div className="text-[10px] text-slate-400 font-mono leading-none mb-1">SKOR MISI TERAKHIR</div>
-                            <div className="text-yellow-500 font-ops text-lg leading-none">{user.lastScore} PTS</div>
-                        </div>
-                    </div>
-                </div>
-           )}
-
-           {/* Levels Grid - Removed auto-rows-fr to let it stack naturally on mobile */}
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 pb-20 mt-auto md:mt-0">
+       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col h-full overflow-y-auto p-2 scrollbar-hide">
+           {/* Levels Grid - Very Compact for mobile */}
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 pb-20">
               {LEVEL_CONFIGS.map((level, index) => {
                   const isLocked = index > user.levelProgress;
                   const isCompleted = index < user.levelProgress;
@@ -313,37 +294,36 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                   return (
                       <div 
                           key={level.id} 
-                          className={`relative group transition-all duration-300 w-full flex flex-col ${isCurrent ? 'z-20 scale-105' : 'z-10'} ${isLocked ? 'opacity-80 grayscale' : 'opacity-100'}`}
+                          className={`relative group transition-all duration-300 w-full flex flex-col ${isCurrent ? 'z-20 scale-[1.02] md:scale-105' : 'z-10'} ${isLocked ? 'opacity-80 grayscale' : 'opacity-100'}`}
                       >
-                          {/* Player Marker Animation */}
                           {isCurrent && (
-                            <div className="absolute -top-3 md:-top-6 left-1/2 -translate-x-1/2 z-50 animate-bounce flex flex-col items-center pointer-events-none">
+                            <div className="absolute -top-2 md:-top-6 left-1/2 -translate-x-1/2 z-50 animate-bounce flex flex-col items-center pointer-events-none">
                                 <div className="bg-green-600 text-white text-[8px] font-bold px-1.5 rounded mb-0.5 shadow border border-green-400 whitespace-nowrap hidden md:block">
                                     LOKASI
                                 </div>
-                                <MapPin className="text-green-500 fill-green-500 drop-shadow-[0_0_5px_lime]" size={24} />
+                                <MapPin className="text-green-500 fill-green-500 drop-shadow-[0_0_5px_lime]" size={16} />
                             </div>
                           )}
 
-                          <Panel className={`flex flex-col justify-between h-full min-h-[140px] md:min-h-[200px] p-2 md:p-5 ${isCurrent ? 'border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.4)] bg-slate-800' : 'bg-slate-900'}`}>
-                              <div className="flex justify-between items-start mb-1">
+                          <Panel className={`flex flex-col justify-between h-full min-h-[90px] md:min-h-[180px] p-2 md:p-4 ${isCurrent ? 'border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.4)] bg-slate-800' : 'bg-slate-900'}`}>
+                              <div className="flex justify-between items-start mb-0.5">
                                   <div className="text-[8px] md:text-xs font-mono text-slate-500">MISI 0{level.id}</div>
-                                  <div className="bg-slate-900 border border-slate-600 p-1 rounded-full">
-                                      {isLocked ? <Lock size={10} className="text-slate-500"/> : isCompleted ? <Star size={10} className="text-yellow-500 fill-yellow-500"/> : <Play size={10} className="text-green-500 fill-green-500 animate-pulse"/>}
+                                  <div className="bg-slate-900 border border-slate-600 p-0.5 md:p-1 rounded-full">
+                                      {isLocked ? <Lock size={8} className="text-slate-500"/> : isCompleted ? <Star size={8} className="text-yellow-500 fill-yellow-500"/> : <Play size={8} className="text-green-500 fill-green-500 animate-pulse"/>}
                                   </div>
                               </div>
                               
-                              <div className="flex-grow flex flex-col justify-center my-1">
-                                  <h4 className="text-yellow-500 font-ops text-xs md:text-xl leading-none mb-1">{level.title}</h4>
+                              <div className="flex-grow flex flex-col justify-center my-0.5">
+                                  <h4 className="text-yellow-500 font-ops text-[10px] md:text-lg leading-none mb-0.5 line-clamp-2">{level.title}</h4>
                                   <h5 className="text-white text-[8px] md:text-xs font-bold leading-tight line-clamp-2 opacity-80">{level.subtitle}</h5>
                               </div>
 
-                              <div className="mt-1 md:mt-2">
+                              <div className="mt-1">
                                 <TacticalButton 
                                     onClick={() => { !isLocked && onStartLevel(level.id) }} 
                                     disabled={isLocked}
                                     variant={isCurrent ? 'primary' : 'secondary'}
-                                    className="w-full text-[8px] md:text-xs py-1 md:py-2 px-1 md:px-2"
+                                    className="w-full text-[8px] md:text-xs py-1 md:py-1.5 px-1 md:px-2"
                                 >
                                     {isLocked ? 'TERKUNCI' : 'MULAI'}
                                 </TacticalButton>
@@ -370,7 +350,6 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                     return 100;
                 }
                 const increment = Math.random() * 5 + 1; // Random increment
-                // Play sound on tick
                 if (prev % 10 < 5) sfx.playTone(800 + prev * 5, 'square', 0.05, 0.05);
                 return Math.min(100, prev + increment);
             });
@@ -388,12 +367,9 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
     return (
         <div className="h-[100dvh] w-full bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
-             {/* Background Image - Loading Screen - Opacity 50% */}
              <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50" 
                   style={{ backgroundImage: "url('https://iili.io/fcuaBXp.jpg')" }}>
              </div>
-
-             {/* Grid overlay */}
              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[length:30px_30px] z-10"></div>
              
              <div className="w-full max-w-lg z-20">
@@ -401,27 +377,16 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                      <span className="text-green-500 font-mono animate-pulse">ESTABLISHING UPLINK...</span>
                      <span className="text-green-500 font-ops text-4xl">{Math.floor(progress)}%</span>
                  </div>
-                 
-                 {/* Progress Bar */}
                  <div className="h-4 bg-slate-900 border border-slate-700 w-full rounded-sm overflow-hidden p-0.5">
                      <div 
                         className="h-full bg-green-500 transition-all duration-100 ease-linear shadow-[0_0_15px_lime]"
                         style={{ width: `${progress}%` }}
                      ></div>
                  </div>
-
                  <div className="mt-4 flex gap-4 text-xs font-mono text-slate-500">
                      <div className="flex items-center gap-2">
                          <Loader2 className="animate-spin" size={12}/>
                          LOADING ASSETS
-                     </div>
-                     <div className="flex items-center gap-2">
-                         <div className={`w-2 h-2 rounded-full ${progress > 50 ? 'bg-green-500 shadow-[0_0_5px_lime]' : 'bg-slate-700'}`}></div>
-                         SYNCING DATABASE
-                     </div>
-                     <div className="flex items-center gap-2">
-                         <div className={`w-2 h-2 rounded-full ${progress > 90 ? 'bg-green-500 shadow-[0_0_5px_lime]' : 'bg-slate-700'}`}></div>
-                         DECRYPTING INTEL
                      </div>
                  </div>
              </div>
@@ -437,15 +402,13 @@ const LevelIntroScreen = ({ levelId, user, onStart }: { levelId: number, user: U
 
   return (
       <div className="h-[100dvh] w-full flex items-center justify-center relative overflow-hidden bg-black">
-           {/* 1. Dramatic Background Visualization - Intro Screen - Opacity 55% */}
            <div 
              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform hover:scale-105 opacity-55"
-             style={{ backgroundImage: `url('https://iili.io/fcu54Tl.jpg')` }}
+             style={{ backgroundImage: `url('${level.image}')` }}
            >
               <div className="absolute inset-0 bg-gradient-to-r from-black via-black/30 to-transparent"></div>
            </div>
 
-           {/* 2. Character Showcase (Changed: Smaller, Top Right) */}
            <div className="absolute top-24 right-4 md:right-10 z-10 hidden md:block animate-in fade-in zoom-in duration-700">
               <img 
                 src={char.image} 
@@ -454,24 +417,22 @@ const LevelIntroScreen = ({ levelId, user, onStart }: { levelId: number, user: U
               />
            </div>
 
-           {/* 3. Mission Brief Panel (Left/Center) */}
            <div className="relative z-20 max-w-2xl w-full p-6 md:ml-20 md:mr-auto">
               <div className="mb-4 flex items-center gap-2">
                  <Target className="text-red-500 animate-pulse" />
                  <span className="text-red-500 font-mono tracking-[0.2em] text-sm">MISSION BRIEFING // LEVEL 0{levelId}</span>
               </div>
               
-              <h1 className="text-6xl md:text-8xl font-ops text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 drop-shadow-sm leading-none mb-2">
+              <h1 className="text-4xl md:text-8xl font-ops text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 drop-shadow-sm leading-none mb-2">
                 {level.title}
               </h1>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 uppercase tracking-wider pl-1 border-l-4 border-white">
+              <h2 className="text-xl md:text-3xl font-bold text-white mb-6 uppercase tracking-wider pl-1 border-l-4 border-white">
                 {level.subtitle}
               </h2>
               
               <div className="bg-slate-900/70 border border-slate-600 backdrop-blur-md p-6 rounded-r-2xl rounded-bl-2xl relative mb-8 clip-diagonal shadow-2xl">
                  <div className="absolute -top-2 left-0 w-10 h-1 bg-yellow-500"></div>
-                 {/* CHANGED: Use TypewriterText for description with Bold Neon Green style */}
-                 <TypewriterText text={level.description} className="text-green-400 font-bold text-xl leading-relaxed font-mono drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
+                 <TypewriterText text={level.description} className="text-green-400 font-bold text-lg md:text-xl leading-relaxed font-mono drop-shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
                  
                  <div className="mt-4 flex gap-4 text-xs font-mono text-slate-400">
                     <span className="bg-black/40 px-2 py-1 rounded border border-slate-700">TARGET: {level.maxScore} PTS</span>
@@ -480,19 +441,13 @@ const LevelIntroScreen = ({ levelId, user, onStart }: { levelId: number, user: U
               </div>
               
               <div className="flex gap-4 items-center">
-                 <TacticalButton onClick={() => { sfx.click(); onStart(); }} className="px-12 py-4 text-xl bg-yellow-600 hover:bg-yellow-500 text-black shadow-[0_0_30px_rgba(234,179,8,0.4)]">
+                 <TacticalButton onClick={() => { sfx.click(); onStart(); }} className="px-8 md:px-12 py-3 md:py-4 text-lg md:text-xl bg-yellow-600 hover:bg-yellow-500 text-black shadow-[0_0_30px_rgba(234,179,8,0.4)]">
                     DEPLOY NOW
                  </TacticalButton>
                  <div className="h-px flex-grow bg-slate-700 relative">
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
                  </div>
               </div>
-           </div>
-           
-           {/* Decorative HUD Elements */}
-           <div className="absolute top-10 right-10 text-right hidden md:block opacity-50">
-               <div className="text-xs font-mono text-yellow-500">SYS.READY</div>
-               <div className="text-4xl font-ops text-white tracking-widest">{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
            </div>
            
            <div className="absolute bottom-10 left-10 flex gap-2 opacity-50">
@@ -506,46 +461,30 @@ const LevelIntroScreen = ({ levelId, user, onStart }: { levelId: number, user: U
   );
 };
 
-// Modified to accept UserProfile for HUD display
 const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: number, user: UserProfile, onAbort: () => void, onComplete: (score: number, remainingHp: number) => void }) => {
   const [hp, setHp] = useState(100);
   const [isGameOver, setIsGameOver] = useState(false);
   const [randomizedData, setRandomizedData] = useState<Question[]>([]);
-  
-  // Track mistakes for evaluation
   const [sessionMistakes, setSessionMistakes] = useState<{question: string, correct: string}[]>([]);
 
-  // Find level config for background image
-  const levelConfig = LEVEL_CONFIGS.find(l => l.id === levelId);
-
-  // RANDOMIZATION LOGIC FOR QUESTIONS AND OPTIONS
   useEffect(() => {
     const rawData = GAME_DATA[user.difficulty][levelId] || [];
-    
-    // 1. Shuffle Questions Order
     const shuffledQuestions = [...rawData].sort(() => Math.random() - 0.5);
-
-    // 2. Shuffle Options within each question and update correctIndex
     const fullyRandomized = shuffledQuestions.map(q => {
         const correctText = q.options[q.correctIndex];
         const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
         const newCorrectIndex = shuffledOptions.indexOf(correctText);
-        
         return {
             ...q,
             options: shuffledOptions,
             correctIndex: newCorrectIndex
         };
     });
-
     setRandomizedData(fullyRandomized);
   }, [levelId, user.difficulty]);
 
-
   const handleDamage = (mistake: { question: string, correct: string }) => {
-      // Record mistake
       setSessionMistakes(prev => [...prev, mistake]);
-
       setHp(prev => {
           const newHp = Math.max(0, prev - 20); 
           if (newHp === 0) {
@@ -558,7 +497,6 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
 
   const handleLevelComplete = (finalScore: number) => {
       sfx.stopBGM();
-      // Pass both score and remaining HP to determine perfection
       onComplete(finalScore + (hp * 2), hp);
   };
 
@@ -571,14 +509,11 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
                       <h2 className="text-4xl font-ops text-white mb-2">MISI GAGAL</h2>
                       <p className="text-red-300 mb-4 text-sm font-mono tracking-wide">KESEHATAN HABIS. SEJARAH TERTUTUP.</p>
                   </div>
-                  
-                  {/* EVALUATION SECTION */}
                   <div className="flex-grow overflow-hidden bg-black/50 border border-red-900 rounded p-4 mb-6 flex flex-col">
                       <div className="flex items-center gap-2 mb-3 border-b border-red-800 pb-2">
                           <ScrollText className="text-red-400" size={16} />
                           <h3 className="text-red-400 font-ops text-lg">ANALISA KEGAGALAN</h3>
                       </div>
-                      
                       <div className="overflow-y-auto pr-2 space-y-3 flex-grow text-left custom-scrollbar">
                           {sessionMistakes.length > 0 ? (
                               sessionMistakes.map((m, idx) => (
@@ -592,7 +527,6 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
                           )}
                       </div>
                   </div>
-
                   <div className="flex-shrink-0">
                       <TacticalButton variant="danger" onClick={onAbort} className="w-full">
                           KEMBALI KE MARKAS
@@ -603,31 +537,26 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
       );
   }
 
-  // Use randomizedData instead of levelData
   return (
       <div className="h-[100dvh] w-full relative flex flex-col overflow-hidden bg-slate-950">
-          {/* BACKGROUND IMAGE - GAMEPLAY SCREEN - Opacity 45% */}
           <div 
              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-45"
              style={{ 
                  backgroundImage: "url('https://iili.io/fcudHle.jpg')" 
              }}
           ></div>
-          
           <div className="relative z-10 flex flex-col h-full">
-            <div className="bg-slate-950/80 p-3 border-b border-slate-700 flex justify-between items-center shadow-lg backdrop-blur-md">
+            <div className="bg-slate-950/80 p-3 border-b border-slate-700 flex justify-between items-center shadow-lg backdrop-blur-md h-14 shrink-0">
                 <button onClick={() => { sfx.stopBGM(); onAbort(); }} className="flex items-center text-slate-400 hover:text-white transition-colors">
                     <ChevronLeft /> BATAL
                 </button>
-                
                 <div className="absolute left-1/2 transform -translate-x-1/2">
                     <HealthBar hp={hp} maxHp={100} />
                 </div>
-
-                <div className="w-20"></div> {/* Spacer */}
+                <div className="w-20"></div> 
             </div>
             
-            <div className="flex-grow p-4 md:p-8 overflow-hidden relative">
+            <div className="flex-grow p-2 md:p-8 overflow-hidden relative">
                 {randomizedData.length > 0 && (
                     <UniversalLevelEngine 
                         data={randomizedData} 
@@ -645,7 +574,6 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
 
 const EvaluationScreen = ({ score, isPerfect, onContinue, onRetry }: { score: number, isPerfect: boolean, onContinue: () => void, onRetry: () => void }) => {
   const stars = score > 1000 ? 3 : score > 500 ? 2 : 1;
-  
   useEffect(() => {
       if (score > 500) sfx.win();
   }, [score]);
@@ -656,14 +584,12 @@ const EvaluationScreen = ({ score, isPerfect, onContinue, onRetry }: { score: nu
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
                  <Award size={80} className={`text-yellow-500 fill-yellow-500 drop-shadow-[0_0_20px_rgba(234,179,8,0.8)] ${!isPerfect && 'grayscale opacity-50'}`} />
             </div>
-            
             <h2 className="text-4xl font-ops text-white mt-8 mb-2">
                 {isPerfect ? "MISI SEMPURNA" : "MISI SELESAI"}
             </h2>
             <div className="text-7xl font-ops text-yellow-400 mb-6 tracking-tighter drop-shadow-md">
                 {score} <span className="text-2xl text-slate-500">PTS</span>
             </div>
-
             <div className="flex justify-center gap-4 mb-8">
                 {[1, 2, 3].map(i => (
                     <div key={i} className={`transform transition-all duration-500 ${i <= stars ? 'scale-110' : 'opacity-30'}`}>
@@ -671,12 +597,10 @@ const EvaluationScreen = ({ score, isPerfect, onContinue, onRetry }: { score: nu
                     </div>
                 ))}
             </div>
-
             <div className="space-y-3">
                 <TacticalButton onClick={onContinue} className="w-full">
                     LANJUT
                 </TacticalButton>
-                
                 <TacticalButton onClick={onRetry} variant="secondary" className="w-full">
                     ULANGI MISI
                 </TacticalButton>
@@ -688,14 +612,12 @@ const EvaluationScreen = ({ score, isPerfect, onContinue, onRetry }: { score: nu
 
 const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onReturn: () => void, onRestart: () => void }) => {
     const char = CHARACTERS.find(c => c.id === user.characterId) || CHARACTERS[0];
-    
-    // Branching Logic based on score
-    let title = "PENJAGA AYAT";
+    let title = "PENJAGA ILMU";
     let desc = "Anda telah menyelesaikan perjalanan, namun masih banyak ilmu yang perlu digali.";
     
     if (user.score > 6000) {
         title = "ULAMA MUDA";
-        desc = "Luar biasa! Pengetahuan Anda tentang sejarah ini sangat mendalam. Teruslah mengamalkannya.";
+        desc = "Luar biasa! Pengetahuan Anda tentang ayat ini sangat mendalam. Teruslah mengamalkannya.";
     } else if (user.score > 4000) {
         title = "SANTRI TELADAN";
         desc = "Hebat! Anda memahami adab dan ilmu dengan baik.";
@@ -710,18 +632,15 @@ const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onRetu
           <h1 className="text-5xl md:text-7xl font-ops text-yellow-500 mb-4 tracking-wider drop-shadow-[0_5px_0px_#854d0e] animate-bounce">
               MISI TUNTAS!
           </h1>
-          
           <div className="flex flex-col items-center justify-center mb-6">
               <ScrollText size={60} className="text-white mb-2" />
               <h2 className="text-3xl text-white font-ops tracking-widest text-center uppercase text-green-400">{title}</h2>
           </div>
-          
           <div className="bg-slate-800/80 p-8 border border-yellow-600/30 mb-8 rounded-lg backdrop-blur mx-auto max-w-2xl transform rotate-1 hover:rotate-0 transition-transform">
               <p className="text-slate-300 italic text-xl mb-6 font-serif leading-relaxed">
                   "{desc}"
               </p>
               <div className="w-full h-px bg-yellow-500/50 mb-6"></div>
-              
               <div className="grid grid-cols-2 gap-8 text-left items-center">
                   <div className="flex flex-col items-center">
                       <img src={char.image} alt="Avatar" className="w-24 h-24 rounded border-2 border-yellow-500 mb-2" />
@@ -733,13 +652,11 @@ const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onRetu
                   </div>
               </div>
           </div>
-
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <TacticalButton onClick={onRestart} className="px-8 py-3 text-lg border-green-500 bg-slate-800 hover:bg-slate-700 text-white" variant="secondary">
                <RefreshCw size={20} className="inline mr-2" />
                ULANGI OPERASI
             </TacticalButton>
-            
             <TacticalButton onClick={onReturn} className="px-8 py-3 text-lg">
                KEMBALI KE LOBI
             </TacticalButton>
@@ -748,8 +665,6 @@ const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onRetu
   </div>
     );
 };
-
-// --- MAIN APP ---
 
 const App = () => {
   const [screen, setScreen] = useState<ScreenState>(ScreenState.TITLE);
@@ -763,58 +678,42 @@ const App = () => {
   });
   const [currentLevelId, setCurrentLevelId] = useState<number>(0);
   const [tempScore, setTempScore] = useState(0);
-  const [isLastRunPerfect, setIsLastRunPerfect] = useState(false); // Track perfection
+  const [isLastRunPerfect, setIsLastRunPerfect] = useState(false);
 
   const login = (name: string) => {
     setUser({ ...user, username: name || 'Pelajar' });
-    setScreen(ScreenState.DIFFICULTY_SELECT); // Changed flow
+    setScreen(ScreenState.DIFFICULTY_SELECT); 
   };
-
   const selectDifficulty = (diff: Difficulty) => {
       setUser({ ...user, difficulty: diff });
       setScreen(ScreenState.CHARACTER_SELECT);
   };
-
   const selectCharacter = (charId: string) => {
       setUser({ ...user, characterId: charId });
       setScreen(ScreenState.MAP);
   };
-
   const startLevel = (levelId: number) => {
     setCurrentLevelId(levelId);
     setScreen(ScreenState.LEVEL_INTRO);
   };
-
   const startLoading = () => {
     setScreen(ScreenState.LOADING);
   };
-
   const beginGameplay = () => {
     sfx.playBGM();
     setScreen(ScreenState.GAMEPLAY);
   };
-
   const finishLevel = (score: number, remainingHp: number) => {
     setTempScore(score);
     const perfectRun = remainingHp === 100;
     setIsLastRunPerfect(perfectRun);
     setScreen(ScreenState.EVALUATION);
-    
-    // CHANGED LOGIC: STRICT UNLOCKING
-    // If the user finishes level X, they should definitely have access to level X+1 (index X).
-    // user.levelProgress is the highest *index* unlocked.
-    // Level ID 1 -> Index 0. If finished, we want to unlock Index 1 (Level 2).
-    // So if currentLevelId (1) > levelProgress (0), update to 1.
-    // Using Math.max guarantees we don't go backwards if replaying earlier levels.
-    
     const nextProgress = Math.max(user.levelProgress, currentLevelId);
-
     let newRank = user.rank;
     if (nextProgress >= 2) newRank = "Penjelajah";
     if (nextProgress >= 4) newRank = "Cendekiawan";
-    if (nextProgress >= 6) newRank = "Master Sejarah";
+    if (nextProgress >= 6) newRank = "Master";
     if (nextProgress === 7) newRank = "Legenda";
-
     setUser(prev => ({
         ...prev,
         score: prev.score + score,
@@ -822,9 +721,7 @@ const App = () => {
         rank: newRank
     }));
   };
-
   const handleReturnFromEvaluation = () => {
-    // Check if level 7 completed (which means levelProgress became 7) and current level was 7
     if (currentLevelId === 7) {
       setScreen(ScreenState.REWARD);
       confetti({
@@ -838,51 +735,36 @@ const App = () => {
       setScreen(ScreenState.MAP);
     }
   };
-  
   const handleRetryLevel = () => {
       startLoading();
   }
-  
-  // NEW: RESTART WHOLE GAME LOGIC
   const restartGame = () => {
       setUser(prev => ({
           ...prev,
-          lastScore: prev.score, // Save current score to history
-          score: 0,              // Reset current score
-          levelProgress: 0,      // Reset progress to Level 1
-          rank: 'Pemula'         // Reset rank
+          lastScore: prev.score,
+          score: 0,
+          levelProgress: 0,
+          rank: 'Pemula'
       }));
-      setScreen(ScreenState.MAP); // Go back to map (which will only show level 1 unlocked)
+      setScreen(ScreenState.MAP);
   };
-
   const logout = () => {
       sfx.stopBGM();
       setScreen(ScreenState.TITLE);
   };
 
   switch (screen) {
-    case ScreenState.TITLE: 
-      return <TitleScreen onStart={() => setScreen(ScreenState.LOGIN)} />;
-    case ScreenState.LOGIN: 
-      return <LoginScreen onLogin={login} />;
-    case ScreenState.DIFFICULTY_SELECT:
-      return <DifficultySelectScreen onSelect={selectDifficulty} />;
-    case ScreenState.CHARACTER_SELECT:
-      return <CharacterSelectScreen onSelect={selectCharacter} />;
-    case ScreenState.MAP: 
-      return <MapScreen user={user} onLogout={logout} onStartLevel={startLevel} />;
-    case ScreenState.LEVEL_INTRO: 
-      return <LevelIntroScreen levelId={currentLevelId} user={user} onStart={startLoading} />;
-    case ScreenState.LOADING:
-      return <LoadingScreen onComplete={beginGameplay} />;
-    case ScreenState.GAMEPLAY: 
-      return <GameplayScreen levelId={currentLevelId} user={user} onAbort={() => setScreen(ScreenState.MAP)} onComplete={finishLevel} />;
-    case ScreenState.EVALUATION: 
-      return <EvaluationScreen score={tempScore} isPerfect={isLastRunPerfect} onContinue={handleReturnFromEvaluation} onRetry={handleRetryLevel} />;
-    case ScreenState.REWARD: 
-      return <RewardScreen user={user} onReturn={() => setScreen(ScreenState.MAP)} onRestart={restartGame} />;
-    default: 
-      return <TitleScreen onStart={() => setScreen(ScreenState.LOGIN)} />;
+    case ScreenState.TITLE: return <TitleScreen onStart={() => setScreen(ScreenState.LOGIN)} />;
+    case ScreenState.LOGIN: return <LoginScreen onLogin={login} />;
+    case ScreenState.DIFFICULTY_SELECT: return <DifficultySelectScreen onSelect={selectDifficulty} />;
+    case ScreenState.CHARACTER_SELECT: return <CharacterSelectScreen onSelect={selectCharacter} />;
+    case ScreenState.MAP: return <MapScreen user={user} onLogout={logout} onStartLevel={startLevel} />;
+    case ScreenState.LEVEL_INTRO: return <LevelIntroScreen levelId={currentLevelId} user={user} onStart={startLoading} />;
+    case ScreenState.LOADING: return <LoadingScreen onComplete={beginGameplay} />;
+    case ScreenState.GAMEPLAY: return <GameplayScreen levelId={currentLevelId} user={user} onAbort={() => setScreen(ScreenState.MAP)} onComplete={finishLevel} />;
+    case ScreenState.EVALUATION: return <EvaluationScreen score={tempScore} isPerfect={isLastRunPerfect} onContinue={handleReturnFromEvaluation} onRetry={handleRetryLevel} />;
+    case ScreenState.REWARD: return <RewardScreen user={user} onReturn={() => setScreen(ScreenState.MAP)} onRestart={restartGame} />;
+    default: return <TitleScreen onStart={() => setScreen(ScreenState.LOGIN)} />;
   }
 };
 
