@@ -3,19 +3,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Operation: Al-Mujadilah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+      }
       body {
         font-family: 'Rajdhani', sans-serif;
         background-color: #0f172a;
         color: #e2e8f0;
         overflow: hidden; /* Prevent scrolling in game */
         cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Crosshair_Red.png') 16 16, crosshair;
+        touch-action: manipulation;
       }
       button, a, .cursor-pointer {
         cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Crosshair_Red.png') 16 16, pointer !important;
@@ -28,6 +33,15 @@
       }
       .clip-button {
         clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      }
+      
+      /* Hide Scrollbar but allow scroll */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
       }
       
       /* --- NEW ANIMATIONS --- */

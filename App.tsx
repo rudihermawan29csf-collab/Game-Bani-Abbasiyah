@@ -42,7 +42,7 @@ const TypewriterText = ({ text, className = "" }: { text: string, className?: st
 
 const TitleScreen = ({ onStart }: { onStart: () => void }) => {
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="h-[100dvh] w-full flex flex-col items-center justify-center relative overflow-hidden">
       {/* 1. BACKGROUND IMAGE - Fixed Link */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0 scale-105 animate-[pulse_10s_ease-in-out_infinite]"
@@ -124,7 +124,7 @@ const TitleScreen = ({ onStart }: { onStart: () => void }) => {
 const LoginScreen = ({ onLogin }: { onLogin: (name: string) => void }) => {
   const [name, setName] = useState('');
   return (
-    <div className="h-screen w-full flex items-center justify-center bg-slate-900 relative overflow-hidden">
+    <div className="h-[100dvh] w-full flex items-center justify-center bg-slate-900 relative overflow-hidden">
       {/* Background Image - Login Screen - Opacity 50% */}
       <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50" 
            style={{ backgroundImage: "url('https://iili.io/fcu0G2t.jpg')" }}>
@@ -159,7 +159,7 @@ const LoginScreen = ({ onLogin }: { onLogin: (name: string) => void }) => {
 
 const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => void }) => {
     return (
-        <div className="h-screen w-full bg-slate-900 flex flex-col items-center justify-center p-4">
+        <div className="h-[100dvh] w-full bg-slate-900 flex flex-col items-center justify-center p-4">
              <div className="max-w-4xl w-full">
                 <h2 className="text-4xl font-ops text-white mb-8 text-center">PILIH TINGKAT OPERASI</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -221,7 +221,7 @@ const DifficultySelectScreen = ({ onSelect }: { onSelect: (diff: Difficulty) => 
 
 const CharacterSelectScreen = ({ onSelect }: { onSelect: (charId: string) => void }) => {
     return (
-        <div className="h-screen w-full bg-slate-900 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="h-[100dvh] w-full bg-slate-900 flex flex-col items-center justify-center p-4 relative overflow-hidden">
             {/* Background Image - Character Select - Opacity 50% */}
             <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50" 
                 style={{ backgroundImage: "url('https://iili.io/fcuctVV.jpg')" }}>
@@ -262,7 +262,7 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
     const diffColor = user.difficulty === Difficulty.HARD ? 'text-red-500' : user.difficulty === Difficulty.MEDIUM ? 'text-yellow-500' : 'text-green-500';
 
     return (
-  <div className="h-screen w-full bg-slate-900 flex flex-col overflow-hidden">
+  <div className="h-[100dvh] w-full bg-slate-900 flex flex-col overflow-hidden">
     {/* Top Bar */}
     <div className="bg-slate-950 px-4 py-2 border-b border-slate-700 flex justify-between items-center z-10 shadow-lg shrink-0">
       <div className="flex items-center gap-3">
@@ -282,16 +282,17 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
       </button>
     </div>
 
-    {/* Map Content - Compact Grid to fit one screen */}
-    <div className="flex-grow relative overflow-hidden flex items-center justify-center p-4">
+    {/* Map Content - Compact Grid to fit one screen but allow scroll if needed */}
+    <div className="flex-grow relative w-full flex flex-col min-h-0">
        {/* Map Background - Opacity 50% */}
        <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{ backgroundImage: "url('https://iili.io/fcuagyJ.jpg')" }}></div>
        
-       <div className="relative z-10 w-full max-w-7xl h-full flex flex-col justify-center">
+       {/* Scrollable Container for Levels */}
+       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col h-full overflow-y-auto p-2 md:p-4 scrollbar-hide">
            
            {/* HISTORY SCORE DISPLAY (Shown if user has replayed) */}
            {user.lastScore !== undefined && user.lastScore > 0 && (
-                <div className="absolute top-0 right-0 md:top-4 md:right-4 z-30 animate-in slide-in-from-top-5">
+                <div className="self-end mb-2 mr-2 animate-in slide-in-from-top-5">
                     <div className="bg-slate-900/90 border border-slate-500 p-2 md:p-3 rounded-bl-xl shadow-xl flex items-center gap-3">
                         <History className="text-slate-400" size={20} />
                         <div>
@@ -302,7 +303,8 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                 </div>
            )}
 
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 auto-rows-fr">
+           {/* Levels Grid - Removed auto-rows-fr to let it stack naturally on mobile */}
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 pb-20 mt-auto md:mt-0">
               {LEVEL_CONFIGS.map((level, index) => {
                   const isLocked = index > user.levelProgress;
                   const isCompleted = index < user.levelProgress;
@@ -311,7 +313,7 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                   return (
                       <div 
                           key={level.id} 
-                          className={`relative group transition-all duration-300 w-full h-full flex flex-col ${isCurrent ? 'z-20 scale-105' : 'z-10'} ${isLocked ? 'opacity-80 grayscale' : 'opacity-100'}`}
+                          className={`relative group transition-all duration-300 w-full flex flex-col ${isCurrent ? 'z-20 scale-105' : 'z-10'} ${isLocked ? 'opacity-80 grayscale' : 'opacity-100'}`}
                       >
                           {/* Player Marker Animation */}
                           {isCurrent && (
@@ -323,25 +325,25 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                             </div>
                           )}
 
-                          <Panel className={`flex flex-col justify-between h-full p-3 md:p-5 ${isCurrent ? 'border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.4)] bg-slate-800' : 'bg-slate-900'}`}>
+                          <Panel className={`flex flex-col justify-between h-full min-h-[140px] md:min-h-[200px] p-2 md:p-5 ${isCurrent ? 'border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.4)] bg-slate-800' : 'bg-slate-900'}`}>
                               <div className="flex justify-between items-start mb-1">
-                                  <div className="text-[10px] md:text-xs font-mono text-slate-500">MISI 0{level.id}</div>
+                                  <div className="text-[8px] md:text-xs font-mono text-slate-500">MISI 0{level.id}</div>
                                   <div className="bg-slate-900 border border-slate-600 p-1 rounded-full">
-                                      {isLocked ? <Lock size={12} className="text-slate-500"/> : isCompleted ? <Star size={12} className="text-yellow-500 fill-yellow-500"/> : <Play size={12} className="text-green-500 fill-green-500 animate-pulse"/>}
+                                      {isLocked ? <Lock size={10} className="text-slate-500"/> : isCompleted ? <Star size={10} className="text-yellow-500 fill-yellow-500"/> : <Play size={10} className="text-green-500 fill-green-500 animate-pulse"/>}
                                   </div>
                               </div>
                               
-                              <div className="flex-grow flex flex-col justify-center">
-                                  <h4 className="text-yellow-500 font-ops text-sm md:text-xl leading-none mb-1">{level.title}</h4>
-                                  <h5 className="text-white text-[10px] md:text-xs font-bold leading-tight line-clamp-2 opacity-80">{level.subtitle}</h5>
+                              <div className="flex-grow flex flex-col justify-center my-1">
+                                  <h4 className="text-yellow-500 font-ops text-xs md:text-xl leading-none mb-1">{level.title}</h4>
+                                  <h5 className="text-white text-[8px] md:text-xs font-bold leading-tight line-clamp-2 opacity-80">{level.subtitle}</h5>
                               </div>
 
-                              <div className="mt-2">
+                              <div className="mt-1 md:mt-2">
                                 <TacticalButton 
                                     onClick={() => { !isLocked && onStartLevel(level.id) }} 
                                     disabled={isLocked}
                                     variant={isCurrent ? 'primary' : 'secondary'}
-                                    className="w-full text-[10px] md:text-xs py-1.5 md:py-2 px-2"
+                                    className="w-full text-[8px] md:text-xs py-1 md:py-2 px-1 md:px-2"
                                 >
                                     {isLocked ? 'TERKUNCI' : 'MULAI'}
                                 </TacticalButton>
@@ -385,7 +387,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     }, [progress, onComplete]);
 
     return (
-        <div className="h-screen w-full bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
+        <div className="h-[100dvh] w-full bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
              {/* Background Image - Loading Screen - Opacity 50% */}
              <div className="absolute inset-0 bg-cover bg-center z-0 opacity-50" 
                   style={{ backgroundImage: "url('https://iili.io/fcuaBXp.jpg')" }}>
@@ -434,7 +436,7 @@ const LevelIntroScreen = ({ levelId, user, onStart }: { levelId: number, user: U
   if (!level) return null;
 
   return (
-      <div className="h-screen w-full flex items-center justify-center relative overflow-hidden bg-black">
+      <div className="h-[100dvh] w-full flex items-center justify-center relative overflow-hidden bg-black">
            {/* 1. Dramatic Background Visualization - Intro Screen - Opacity 55% */}
            <div 
              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform hover:scale-105 opacity-55"
@@ -562,7 +564,7 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
 
   if (isGameOver) {
       return (
-          <div className="h-screen w-full bg-red-950 flex items-center justify-center p-4">
+          <div className="h-[100dvh] w-full bg-red-950 flex items-center justify-center p-4">
               <Panel className="text-center border-red-500 w-full max-w-2xl max-h-[90vh] flex flex-col">
                   <div className="flex-shrink-0">
                       <Skull size={60} className="mx-auto text-red-500 mb-2 animate-pulse" />
@@ -603,7 +605,7 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete }: { levelId: numbe
 
   // Use randomizedData instead of levelData
   return (
-      <div className="h-screen w-full relative flex flex-col overflow-hidden bg-slate-950">
+      <div className="h-[100dvh] w-full relative flex flex-col overflow-hidden bg-slate-950">
           {/* BACKGROUND IMAGE - GAMEPLAY SCREEN - Opacity 45% */}
           <div 
              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-45"
@@ -649,7 +651,7 @@ const EvaluationScreen = ({ score, isPerfect, onContinue, onRetry }: { score: nu
   }, [score]);
 
   return (
-    <div className="h-screen w-full bg-slate-900 flex items-center justify-center p-4">
+    <div className="h-[100dvh] w-full bg-slate-900 flex items-center justify-center p-4">
         <Panel className="max-w-md w-full text-center py-10 relative overflow-visible">
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
                  <Award size={80} className={`text-yellow-500 fill-yellow-500 drop-shadow-[0_0_20px_rgba(234,179,8,0.8)] ${!isPerfect && 'grayscale opacity-50'}`} />
@@ -703,7 +705,7 @@ const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onRetu
     }
 
     return (
-  <div className="h-screen w-full bg-gradient-to-b from-yellow-900 via-slate-900 to-black flex items-center justify-center p-4">
+  <div className="h-[100dvh] w-full bg-gradient-to-b from-yellow-900 via-slate-900 to-black flex items-center justify-center p-4">
       <div className="max-w-4xl w-full bg-black/80 border-4 border-yellow-500 p-8 md:p-12 text-center relative clip-diagonal shadow-[0_0_50px_rgba(234,179,8,0.3)]">
           <h1 className="text-5xl md:text-7xl font-ops text-yellow-500 mb-4 tracking-wider drop-shadow-[0_5px_0px_#854d0e] animate-bounce">
               MISI TUNTAS!
