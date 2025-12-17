@@ -65,7 +65,7 @@ const TitleScreen = ({ onStart }: { onStart: () => void }) => {
             {/* Top Tag */}
             <div className="flex items-center gap-2 mb-4 animate-in slide-in-from-top-10 fade-in duration-1000">
                 <div className="h-px w-12 bg-yellow-500"></div>
-                <span className="text-yellow-400 font-mono tracking-[0.3em] text-xs md:text-sm drop-shadow-md">MISSION START</span>
+                <span className="text-yellow-400 font-mono tracking-[0.3em] text-xs md:text-sm drop-shadow-md">TOP SECRET MISSION</span>
                 <div className="h-px w-12 bg-yellow-500"></div>
             </div>
 
@@ -80,16 +80,16 @@ const TitleScreen = ({ onStart }: { onStart: () => void }) => {
             </div>
 
             <h1 
-                className="text-3xl md:text-6xl font-ops animate-shine drop-shadow-lg glitch-text leading-tight"
-                data-text="AL-MUJADILAH: 11"
+                className="text-4xl md:text-7xl font-ops animate-shine drop-shadow-lg glitch-text leading-tight"
+                data-text="BANI ABBASIYAH"
             >
-              AL-MUJADILAH: 11
+              BANI ABBASIYAH
             </h1>
             
             <div className="mt-8 transform -skew-x-12 bg-slate-900/80 border-l-4 border-yellow-500 px-8 py-2 relative overflow-hidden group">
                  <div className="absolute inset-0 bg-yellow-500/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                 <p className="text-slate-200 tracking-[0.5em] text-xs md:text-lg font-mono">
-                    OPERATION: KNOWLEDGE & FAITH
+                 <p className="text-slate-200 tracking-[0.5em] text-sm md:text-lg font-mono">
+                    OPERATION: GOLDEN AGE
                 </p>
             </div>
             
@@ -617,7 +617,7 @@ const RewardScreen = ({ user, onReturn, onRestart }: { user: UserProfile, onRetu
     
     if (user.score > 6000) {
         title = "ULAMA MUDA";
-        desc = "Luar biasa! Pengetahuan Anda tentang ayat ini sangat mendalam. Teruslah mengamalkannya.";
+        desc = "Luar biasa! Pengetahuan Anda tentang sejarah ini sangat mendalam. Teruslah mengamalkannya.";
     } else if (user.score > 4000) {
         title = "SANTRI TELADAN";
         desc = "Hebat! Anda memahami adab dan ilmu dengan baik.";

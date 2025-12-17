@@ -32,76 +32,76 @@ export const CHARACTERS: Character[] = [
   }
 ];
 
-// BACKGROUNDS TEMA ISLAMI / AL-QURAN
-const BG_LEVEL_1 = "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?q=80&w=2070&auto=format&fit=crop"; // Quran Open
-const BG_LEVEL_2 = "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=2070&auto=format&fit=crop"; // Mosque Interior
-const BG_LEVEL_3 = "https://images.unsplash.com/photo-1597935266355-19d5c190283e?q=80&w=2070&auto=format&fit=crop"; // Calligraphy
-const BG_LEVEL_4 = "https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=2070&auto=format&fit=crop"; // Study
-const BG_LEVEL_5 = "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=2070&auto=format&fit=crop"; // Architecture
-const BG_LEVEL_6 = "https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?q=80&w=1974&auto=format&fit=crop"; // Night
-const BG_LEVEL_7 = "https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=2074&auto=format&fit=crop"; // Light
+// BACKGROUNDS TEMA SEJARAH / TIMUR TENGAH
+const BG_LEVEL_1 = "https://images.unsplash.com/photo-1565552629477-59e332363b69?q=80&w=2070"; // Desert/Beginning
+const BG_LEVEL_2 = "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1776"; // Architecture/Baghdad
+const BG_LEVEL_3 = "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=2070"; // Palace/Gold
+const BG_LEVEL_4 = "https://images.unsplash.com/photo-1524578271613-d550eacf6090?q=80&w=2070"; // Library/Books
+const BG_LEVEL_5 = "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070"; // Science/Astro
+const BG_LEVEL_6 = "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=2070"; // Mosque/Samarra
+const BG_LEVEL_7 = "https://images.unsplash.com/photo-1518557984649-7b16d9e66b9e?q=80&w=2070"; // Ruins/Dark
 
 export const LEVEL_CONFIGS: LevelConfig[] = [
   {
     id: 1,
-    title: "SUSUNAN AYAT",
-    subtitle: "Melengkapi Potongan",
+    title: "REVOLUSI ABBAS",
+    subtitle: "Awal Kebangkitan",
     type: LevelType.RAPID_FIRE,
-    description: "Lengkapi potongan ayat Q.S. Al-Mujadilah [58]: 11 dengan urutan yang benar.",
+    description: "Selidiki asal-usul berdirinya Dinasti Bani Abbasiyah dan tokoh-tokoh kuncinya.",
     maxScore: 1000,
     image: BG_LEVEL_1 
   },
   {
     id: 2,
-    title: "KOSA KATA (1)",
-    subtitle: "Arti Per Kata",
+    title: "KOTA BUNDAR",
+    subtitle: "Membangun Baghdad",
     type: LevelType.RAPID_FIRE,
-    description: "Pahami makna perkata (Mufradat) bagian awal ayat.",
+    description: "Pelajari sejarah pembangunan kota Baghdad sebagai pusat peradaban dunia.",
     maxScore: 1000,
     image: BG_LEVEL_2 
   },
   {
     id: 3,
-    title: "KOSA KATA (2)",
-    subtitle: "Arti Per Kata Lanjutan",
+    title: "MASA KEEMASAN",
+    subtitle: "Puncak Kejayaan",
     type: LevelType.RAPID_FIRE,
-    description: "Pahami makna perkata (Mufradat) bagian inti tentang derajat ilmu.",
+    description: "Era Harun Ar-Rasyid dan kemakmuran ekonomi serta sosial.",
     maxScore: 1000,
     image: BG_LEVEL_3 
   },
   {
     id: 4,
-    title: "HUKUM BACAAN",
-    subtitle: "Analisis Tajwid",
+    title: "BAITUL HIKMAH",
+    subtitle: "Pusat Ilmu",
     type: LevelType.RAPID_FIRE,
-    description: "Identifikasi hukum bacaan (Tajwid) yang terdapat dalam ayat.",
+    description: "Perpustakaan legendaris dan gerakan penerjemahan besar-besaran.",
     maxScore: 1000,
     image: BG_LEVEL_4 
   },
   {
     id: 5,
-    title: "TERJEMAHAN",
-    subtitle: "Makna Utuh",
+    title: "PARA ILMUWAN",
+    subtitle: "Tokoh Intelektual",
     type: LevelType.RAPID_FIRE,
-    description: "Memahami terjemahan lengkap Q.S. Al-Mujadilah ayat 11.",
+    description: "Kenali tokoh-tokoh besar seperti Al-Khawarizmi, Ibn Sina, dan Al-Razi.",
     maxScore: 1000,
     image: BG_LEVEL_5 
   },
   {
     id: 6,
-    title: "KANDUNGAN AYAT",
-    subtitle: "Isi & Makna",
+    title: "SENI & BUDAYA",
+    subtitle: "Keindahan Peradaban",
     type: LevelType.RAPID_FIRE,
-    description: "Memahami pesan pokok dan kandungan Q.S. Al-Mujadilah ayat 11.",
+    description: "Perkembangan arsitektur, sastra, dan seni kaligrafi.",
     maxScore: 1000,
     image: BG_LEVEL_6 
   },
   {
     id: 7,
-    title: "PENERAPAN",
-    subtitle: "Perilaku Mulia",
+    title: "KERUNTUHAN",
+    subtitle: "Akhir Sebuah Era",
     type: LevelType.RAPID_FIRE,
-    description: "Contoh perilaku yang mencerminkan pengamalan ayat dalam kehidupan sehari-hari.",
+    description: "Faktor-faktor penyebab kemunduran dan serangan Bangsa Mongol.",
     maxScore: 1000,
     image: BG_LEVEL_7 
   }
@@ -114,113 +114,113 @@ type GameData = Record<Difficulty, Record<number, Question[]>>;
 export const GAME_DATA: GameData = {
   [Difficulty.EASY]: {
     1: [
-      { id: 'e1-1', text: "Lengkapi ayat: 'Yaa ayyuhalladzina ... idza qiila lakum'", options: ["Aamanu", "Kafaru", "Aslamu", "Jahadu"], correctIndex: 0 },
-      { id: 'e1-2', text: "Lanjutan ayat: 'Tafassahu fii ...'", options: ["Al-Majaalis", "Al-Buyut", "Al-Masajid", "Al-Madaris"], correctIndex: 0 },
-      { id: 'e1-3', text: "Lanjutan ayat: 'Yarfa'illahulladzina aamanu minkum walladzina utul ...'", options: ["Maala", "Ilma", "Quwwata", "Sulthana"], correctIndex: 1 }
+      { id: 'e1-1', text: "Siapakah pendiri Daulah Bani Abbasiyah?", options: ["Abu al-Abbas as-Saffah", "Muawiyah bin Abu Sufyan", "Harun Ar-Rasyid", "Umar bin Abdul Aziz"], correctIndex: 0 },
+      { id: 'e1-2', text: "Daulah Abbasiyah berdiri setelah runtuhnya Daulah...", options: ["Umayyah", "Fatimiyah", "Ustmaniyah", "Ayyubiyah"], correctIndex: 0 },
+      { id: 'e1-3', text: "Tahun berapakah Bani Abbasiyah resmi berdiri?", options: ["750 M", "632 M", "1453 M", "1924 M"], correctIndex: 0 }
     ],
     2: [
-      { id: 'e2-1', text: "Apa arti dari kata 'Aamanu' (آمَنُوا)?", options: ["Orang-orang kafir", "Orang-orang beriman", "Orang-orang munafik", "Orang-orang musyrik"], correctIndex: 1 },
-      { id: 'e2-2', text: "Kata 'Idza qiila' (إِذَا قِيلَ) artinya adalah...", options: ["Apabila dikatakan", "Apabila dilihat", "Apabila didengar", "Apabila ditulis"], correctIndex: 0 },
-      { id: 'e2-3', text: "'Lakum' (لَكُمْ) dalam ayat ini berarti...", options: ["Bagi mereka", "Bagi kami", "Bagi kamu (kalian)", "Bagi dia"], correctIndex: 2 }
+      { id: 'e2-1', text: "Kota yang dibangun oleh Khalifah Al-Mansur adalah...", options: ["Baghdad", "Damaskus", "Kairo", "Madinah"], correctIndex: 0 },
+      { id: 'e2-2', text: "Julukan kota Baghdad adalah...", options: ["Kota Seribu Satu Malam", "Kota Pelajar", "Kota Wali", "Kota Terlarang"], correctIndex: 0 },
+      { id: 'e2-3', text: "Bentuk desain awal kota Baghdad adalah...", options: ["Bundar (Lingkaran)", "Kotak", "Segitiga", "Tidak beraturan"], correctIndex: 0 }
     ],
     3: [
-      { id: 'e3-1', text: "Arti kata 'Yarfa'i' (يَرْفَعِ) adalah...", options: ["Menjatuhkan", "Meninggikan/Mengangkat", "Menghinakan", "Membiarkan"], correctIndex: 1 },
-      { id: 'e3-2', text: "'Darojat' (دَرَجَاتٍ) artinya...", options: ["Satu derajat", "Beberapa derajat", "Tangga", "Pangkat dunia"], correctIndex: 1 },
-      { id: 'e3-3', text: "Kata 'Al-Ilma' (الْعِلْمَ) berarti...", options: ["Harta", "Kekuasaan", "Ilmu Pengetahuan", "Kesehatan"], correctIndex: 2 }
+      { id: 'e3-1', text: "Khalifah yang terkenal pada masa keemasan Abbasiyah adalah...", options: ["Harun Ar-Rasyid", "Yazid bin Muawiyah", "Al-Walid", "Marwan II"], correctIndex: 0 },
+      { id: 'e3-2', text: "Kisah sastra terkenal dari masa ini berjudul...", options: ["1001 Malam", "Mahabharata", "Romeo Juliet", "Harry Potter"], correctIndex: 0 },
+      { id: 'e3-3', text: "Masa keemasan Islam sering disebut dengan istilah...", options: ["The Golden Age", "Dark Ages", "Renaissance", "Industrial Revolution"], correctIndex: 0 }
     ],
     4: [
-      { id: 'e4-1', text: "Hukum bacaan pada kata 'Minkum' (مِنْكُمْ) adalah...", options: ["Idgham Bighunnah", "Ikhfa' Haqiqi", "Izhar Halqi", "Iqlab"], correctIndex: 1 },
-      { id: 'e4-2', text: "Pada kata 'Alladzina' (الَّذِينَ) terdapat bacaan...", options: ["Al Syamsiyah", "Al Qamariyah", "Mad Wajib", "Qalqalah"], correctIndex: 0 },
-      { id: 'e4-3', text: "Kata 'Khabir' (خَبِيرٌ) di akhir ayat dibaca dengan hukum...", options: ["Mad Arid Lissukun", "Mad Thabi'i", "Mad Iwad", "Mad Jaiz"], correctIndex: 0 }
+      { id: 'e4-1', text: "Apa nama perpustakaan besar di Baghdad?", options: ["Baitul Hikmah", "Taj Mahal", "Al-Azhar", "Hagia Sophia"], correctIndex: 0 },
+      { id: 'e4-2', text: "Khalifah yang sangat mencintai ilmu pengetahuan adalah...", options: ["Al-Ma'mun", "Al-Mutawakkil", "As-Saffah", "Al-Amin"], correctIndex: 0 },
+      { id: 'e4-3', text: "Kegiatan utama di Baitul Hikmah adalah...", options: ["Penerjemahan buku", "Latihan perang", "Berdagang", "Pertanian"], correctIndex: 0 }
     ],
     5: [
-      { id: 'e5-1', text: "Terjemahan 'Tafassahu fil majalis' adalah...", options: ["Berlapang-lapanglah dalam majelis", "Berdiri dalam majelis", "Diam dalam majelis", "Tidur dalam majelis"], correctIndex: 0 },
-      { id: 'e5-2', text: "Allah akan meninggikan orang-orang yang beriman dan...", options: ["Orang yang kaya", "Orang yang berilmu", "Orang yang kuat", "Orang yang tampan"], correctIndex: 1 },
-      { id: 'e5-3', text: "'Wallahu bimaa ta'maluna khabir' artinya Allah Maha ... terhadap apa yang kamu kerjakan.", options: ["Melihat", "Mendengar", "Teliti/Mengetahui", "Pengasih"], correctIndex: 2 }
+      { id: 'e5-1', text: "Bapak Aljabar (Matematika) adalah...", options: ["Al-Khawarizmi", "Al-Farabi", "Ibn Sina", "Ibn Batutah"], correctIndex: 0 },
+      { id: 'e5-2', text: "Ilmuwan muslim ahli kedokteran yang menulis Qanun Fi Thib adalah...", options: ["Ibn Sina (Avicenna)", "Al-Kindi", "Al-Ghazali", "Ibn Rusyd"], correctIndex: 0 },
+      { id: 'e5-3', text: "Al-Razi adalah ahli di bidang...", options: ["Kedokteran & Kimia", "Astronomi", "Geografi", "Sejarah"], correctIndex: 0 }
     ],
     6: [
-      { id: 'e6-1', text: "Isi kandungan utama ayat ini adalah tentang keutamaan...", options: ["Berperang", "Menuntut Ilmu & Berlapang dada", "Berdagang", "Berhaji"], correctIndex: 1 },
-      { id: 'e6-2', text: "Sikap yang diperintahkan saat berada di majelis ilmu adalah...", options: ["Berdesak-desakan", "Memberi kelapangan/tempat", "Berisik", "Makan dan minum"], correctIndex: 1 },
-      { id: 'e6-3', text: "Derajat yang tinggi diberikan Allah kepada...", options: ["Hanya orang berilmu", "Orang beriman & berilmu", "Hanya orang beriman", "Para pejabat"], correctIndex: 1 }
+      { id: 'e6-1', text: "Kota Samarra terkenal dengan menaranya yang berbentuk...", options: ["Spiral (Malwiya)", "Kotak", "Lurus", "Piramida"], correctIndex: 0 },
+      { id: 'e6-2', text: "Seni tulisan indah arab disebut...", options: ["Kaligrafi (Khat)", "Grafiti", "Lukisan", "Ukir"], correctIndex: 0 },
+      { id: 'e6-3', text: "Istana khalifah biasanya dihiasi dengan...", options: ["Taman dan air mancur", "Patung hewan", "Gambar manusia", "Sampah"], correctIndex: 0 }
     ],
     7: [
-      { id: 'e7-1', text: "Contoh pengamalan ayat ini di sekolah adalah...", options: ["Memonopoli tempat duduk", "Memberi kesempatan teman duduk", "Membolos", "Tidur di kelas"], correctIndex: 1 },
-      { id: 'e7-2', text: "Jika guru meminta kita berdiri atau pindah demi kebaikan, sikap kita...", options: ["Menolak", "Marah", "Mentaati dengan ikhlas", "Pura-pura tidak dengar"], correctIndex: 2 },
-      { id: 'e7-3', text: "Semangat menuntut ilmu merupakan bentuk pengamalan ayat ini karena...", options: ["Mendapat uang", "Menaikkan derajat di sisi Allah", "Supaya dipuji", "Takut dimarahi"], correctIndex: 1 }
+      { id: 'e7-1', text: "Bani Abbasiyah runtuh akibat serangan bangsa...", options: ["Mongol", "Romawi", "Persia", "Turki"], correctIndex: 0 },
+      { id: 'e7-2', text: "Pemimpin pasukan Mongol yang menghancurkan Baghdad adalah...", options: ["Hulagu Khan", "Genghis Khan", "Kubilai Khan", "Attila"], correctIndex: 0 },
+      { id: 'e7-3', text: "Tahun runtuhnya Baghdad adalah...", options: ["1258 M", "1492 M", "1945 M", "1000 M"], correctIndex: 0 }
     ]
   },
   [Difficulty.MEDIUM]: {
     1: [
-      { id: 'm1-1', text: "Potongan yang tepat: '... fafsahuu yafsahillahu lakum'", options: ["Idza qiila lakum", "Fanshuzu", "Tafassahu", "Yarfaillah"], correctIndex: 2 },
-      { id: 'm1-2', text: "Lengkapi: 'Wa idza qiila ... fanshuzu'", options: ["Unzhuru", "Isma'u", "Inshuzu", "Iqra'u"], correctIndex: 2 },
-      { id: 'm1-3', text: "Akhir ayat berbunyi: 'Wallahu bimaa ta'maluna ...'", options: ["Bashiir", "Khabir", "Sami'", "Alim"], correctIndex: 1 }
+      { id: 'm1-1', text: "Gerakan propaganda Abbasiyah berpusat di kota...", options: ["Khurasan", "Mekkah", "Madinah", "Yaman"], correctIndex: 0 },
+      { id: 'm1-2', text: "Tokoh militer yang sangat berjasa dalam revolusi Abbasiyah adalah...", options: ["Abu Muslim Al-Khurasani", "Khalid bin Walid", "Salahuddin Al-Ayubi", "Thariq bin Ziyad"], correctIndex: 0 },
+      { id: 'm1-3', text: "Pertempuran penentuan antara Umayyah dan Abbasiyah terjadi di...", options: ["Sungai Zab", "Yarmuk", "Badar", "Uhud"], correctIndex: 0 }
     ],
     2: [
-      { id: 'm2-1', text: "Makna kata 'Fanshuzu' (فَانْشُزُوا) adalah...", options: ["Maka duduklah", "Maka berdirilah/bangkitlah", "Maka diamlah", "Maka pergilah"], correctIndex: 1 },
-      { id: 'm2-2', text: "Kata 'Yafsahillahu' (يَفْسَحِ اللَّهُ) bermakna...", options: ["Allah akan menyempitkan", "Allah akan melapangkan", "Allah akan melihat", "Allah akan mengunci"], correctIndex: 1 },
-      { id: 'm2-3', text: "'Alladzina uutul 'ilma' (الَّذِينَ أُوتُوا الْعِلْمَ) artinya...", options: ["Orang yang mencari ilmu", "Orang yang diberi ilmu", "Orang yang mengajarkan ilmu", "Orang yang menyembunyikan ilmu"], correctIndex: 1 }
+      { id: 'm2-1', text: "Nama lain kota Baghdad adalah Madinat as-Salam, yang artinya...", options: ["Kota Perdamaian", "Kota Kemenangan", "Kota Cahaya", "Kota Pelabuhan"], correctIndex: 0 },
+      { id: 'm2-2', text: "Arsitek yang merancang kota Baghdad bernama...", options: ["Hajjaj bin Arthah", "Sinan", "Imhotep", "Michelangelo"], correctIndex: 0 },
+      { id: 'm2-3', text: "Berapa gerbang utama yang dimiliki Kota Bundar Baghdad?", options: ["4 Gerbang", "2 Gerbang", "7 Gerbang", "12 Gerbang"], correctIndex: 0 }
     ],
     3: [
-      { id: 'm3-1', text: "Akar kata 'Yarfa'' adalah R-F-A yang berarti...", options: ["Turun", "Tinggi/Angkat", "Jauh", "Dekat"], correctIndex: 1 },
-      { id: 'm3-2', text: "Kata 'Majalis' adalah bentuk jamak dari...", options: ["Julus", "Majlis", "Jalis", "Ijlas"], correctIndex: 1 },
-      { id: 'm3-3', text: "Perbedaan 'Aamanu' dan 'Utul ilma' dalam ayat ini menunjukkan...", options: ["Iman dan Ilmu terpisah", "Iman dan Ilmu saling melengkapi", "Ilmu lebih penting dari Iman", "Iman tidak butuh Ilmu"], correctIndex: 1 }
+      { id: 'm3-1', text: "Keluarga Barmaki dikenal sebagai keluarga...", options: ["Wazir (Menteri) yang berpengaruh", "Pedagang kaya", "Pemberontak", "Petani"], correctIndex: 0 },
+      { id: 'm3-2', text: "Harun Ar-Rasyid menjalin hubungan diplomatik dengan raja Eropa bernama...", options: ["Charlemagne", "Napoleon", "Alexander", "Caesar"], correctIndex: 0 },
+      { id: 'm3-3', text: "Istri Harun Ar-Rasyid yang terkenal bernama...", options: ["Zubaidah", "Aisyah", "Khadijah", "Fatimah"], correctIndex: 0 }
     ],
     4: [
-      { id: 'm4-1', text: "Hukum bacaan 'Lam Jalalah' pada 'Yafsahillahu' dibaca...", options: ["Tafkhim (Tebal)", "Tarqiq (Tipis)", "Qalqalah", "Ghunnah"], correctIndex: 1 },
-      { id: 'm4-2', text: "Pada lafaz 'Darojat', huruf Jim memiliki sifat...", options: ["Hams", "Jahr & Qalqalah", "Istila'", "Sofir"], correctIndex: 1 },
-      { id: 'm4-3', text: "Tanwin bertemu huruf Wau pada 'Darojatiw-Wallahu' (jika washal) adalah hukum...", options: ["Idgham Bighunnah", "Idgham Bilaghunnah", "Ikhfa", "Izhar"], correctIndex: 0 }
+      { id: 'm4-1', text: "Penerjemah Kristen Nestorian yang terkenal di Baitul Hikmah adalah...", options: ["Hunain bin Ishaq", "Tsabit bin Qurra", "Al-Kindi", "Al-Battani"], correctIndex: 0 },
+      { id: 'm4-2', text: "Buku-buku Yunani kuno banyak diterjemahkan, terutama karya...", options: ["Aristoteles & Plato", "Shakespeare", "Confucius", "Newton"], correctIndex: 0 },
+      { id: 'm4-3', text: "Selain perpustakaan, Baitul Hikmah juga berfungsi sebagai...", options: ["Observatorium Astronomi", "Pasar", "Barak Militer", "Penjara"], correctIndex: 0 }
     ],
     5: [
-      { id: 'm5-1', text: "Mengapa ayat ini memerintahkan berlapang-lapang dalam majelis?", options: ["Agar majelis terlihat sepi", "Untuk memuliakan sesama & kenyamanan", "Agar bisa tidur", "Supaya guru senang"], correctIndex: 1 },
-      { id: 'm5-2', text: "Janji Allah bagi orang yang melapangkan majelis adalah...", options: ["Diberi uang", "Dilapangkan kehidupannya oleh Allah", "Diberi makanan", "Dihormati orang"], correctIndex: 1 },
-      { id: 'm5-3', text: "Perintah 'Fanshuzu' (berdirilah) menyiratkan sikap...", options: ["Malas", "Sigap & Taat", "Sombong", "Ragu-ragu"], correctIndex: 1 }
+      { id: 'm5-1', text: "Karya Al-Khawarizmi yang memperkenalkan angka nol adalah...", options: ["Al-Jabar wal Muqabalah", "Al-Qanun", "Ihya Ulumuddin", "Al-Umm"], correctIndex: 0 },
+      { id: 'm5-2', text: "Bapak Optik Modern yang menulis Kitab Al-Manazir adalah...", options: ["Ibn al-Haytham", "Ibn Batutah", "Al-Biruni", "Al-Zahrawi"], correctIndex: 0 },
+      { id: 'm5-3', text: "Tokoh sufi wanita terkenal pada masa ini adalah...", options: ["Rabiah Al-Adawiyah", "Siti Hajar", "Cut Nyak Dien", "Kartini"], correctIndex: 0 }
     ],
     6: [
-      { id: 'm6-1', text: "Asbabun Nuzul ayat ini berkaitan dengan sahabat yang...", options: ["Datang terlambat ke majelis Nabi", "Berperang di jalan Allah", "Bersedekah", "Membangun masjid"], correctIndex: 0 },
-      { id: 'm6-2', text: "Ayat ini mengajarkan adab sopan santun dalam...", options: ["Jual beli", "Majelis Ilmu/Pertemuan", "Peperangan", "Berpakaian"], correctIndex: 1 },
-      { id: 'm6-3', text: "Ilmu tanpa iman akan membuat seseorang...", options: ["Mulia", "Sombong/Tersesat", "Bahagia", "Kaya"], correctIndex: 1 }
+      { id: 'm6-1', text: "Kota Samarra dibangun sebagai ibu kota baru oleh Khalifah...", options: ["Al-Mu'tashim", "Al-Mansur", "Al-Mahdi", "Al-Hadi"], correctIndex: 0 },
+      { id: 'm6-2', text: "Corak seni Abbasiyah banyak dipengaruhi oleh budaya...", options: ["Persia (Sassanid)", "Romawi", "India", "Cina"], correctIndex: 0 },
+      { id: 'm6-3', text: "Jenis kaligrafi yang populer dan tegas bentuknya disebut...", options: ["Khat Kufi", "Khat Naskhi", "Khat Riq'ah", "Khat Diwani"], correctIndex: 0 }
     ],
     7: [
-      { id: 'm7-1', text: "Tindakan berikut yang TIDAK mencerminkan ayat ini adalah...", options: ["Mempersilakan orang tua duduk", "Menggeser duduk untuk teman", "Menaruh tas di kursi kosong agar tidak diduduki orang", "Berdiri saat diminta guru"], correctIndex: 2 },
-      { id: 'm7-2', text: "Rajin belajar dan berdoa adalah upaya menyeimbangkan...", options: ["Dunia dan Akhirat", "Iman dan Ilmu", "Siang dan Malam", "Kaya dan Miskin"], correctIndex: 1 },
-      { id: 'm7-3', text: "Jika kita berilmu, kita harus...", options: ["Merendahkan orang bodoh", "Mengamalkan dan mengajarkannya", "Menyimpannya sendiri", "Menjualnya dengan mahal"], correctIndex: 1 }
+      { id: 'm7-1', text: "Salah satu faktor internal kemunduran Abbasiyah adalah...", options: ["Perebutan kekuasaan & kemewahan", "Kurang makanan", "Terlalu banyak ilmu", "Gempa bumi"], correctIndex: 0 },
+      { id: 'm7-2', text: "Dinasti-dinasti kecil yang memisahkan diri disebut...", options: ["Dinasti Kecil (Muluk Ath-Thawaif)", "Dinasti Besar", "Negara Bagian", "Provinsi"], correctIndex: 0 },
+      { id: 'm7-3', text: "Buku-buku perpustakaan Baghdad dibuang Mongol ke sungai...", options: ["Tigris", "Nil", "Eufrat", "Amazon"], correctIndex: 0 }
     ]
   },
   [Difficulty.HARD]: {
     1: [
-      { id: 'h1-1', text: "Susunan yang benar: (1) Yarfaillah (2) Minkum (3) Aamanu (4) Alladzina", options: ["1-4-3-2", "4-3-2-1", "1-2-3-4", "4-1-3-2"], correctIndex: 0 },
-      { id: 'h1-2', text: "Potongan akhir yang benar secara tajwid...", options: ["Wallahu bima ta'maluna khabir", "Wallahu bima ta'maluna bashiir", "Wallahu bima ta'maluna 'aliim", "Wallahu 'ala kulli syaiin qadir"], correctIndex: 0 },
-      { id: 'h1-3', text: "Kata sebelum 'Yafsahillahu lakum' adalah...", options: ["Fafsahuu", "Fanshuzu", "Qiila", "Aamanu"], correctIndex: 0 }
+      { id: 'h1-1', text: "Siapakah paman Nabi yang menjadi nisbat nama Bani Abbasiyah?", options: ["Abbas bin Abdul Muthalib", "Abu Thalib", "Hamzah", "Abu Lahab"], correctIndex: 0 },
+      { id: 'h1-2', text: "Sistem pemerintahan Abbasiyah berubah dari Arab-sentris menjadi lebih...", options: ["Kosmopolitan (Internasional)", "Suku-sentris", "Feodal Eropa", "Demokratis modern"], correctIndex: 0 },
+      { id: 'h1-3', text: "Khalifah pertama As-Saffah memerintah selama...", options: ["4 Tahun", "10 Tahun", "20 Tahun", "1 Tahun"], correctIndex: 0 }
     ],
     2: [
-      { id: 'h2-1', text: "Secara bahasa, 'Mujadilah' (nama surah) berarti...", options: ["Wanita yang menggugat/membantah", "Wanita yang sholehah", "Peperangan", "Perselisihan"], correctIndex: 0 },
-      { id: 'h2-2', text: "Bentuk fi'il amr (kata perintah) dalam ayat ini adalah...", options: ["Aamanu & Utu", "Fafsahuu & Fanshuzu", "Qiila & Yafsah", "Yarfa' & Ta'malun"], correctIndex: 1 },
-      { id: 'h2-3', text: "Lawan kata (Antonim) dari 'Yarfa' (Meninggikan) adalah...", options: ["Yakhfidu (Merendahkan)", "Yazidu (Menambah)", "Yanqusu (Mengurangi)", "Yakburu (Membesar)"], correctIndex: 0 }
+      { id: 'h2-1', text: "Biaya pembangunan Baghdad konon mencapai...", options: ["4.883.000 Dirham", "1 Juta Dinar", "100 Emas", "Tak terhingga"], correctIndex: 0 },
+      { id: 'h2-2', text: "Istana Al-Mansur di tengah kota Baghdad bernama...", options: ["Qasr al-Dzahab (Istana Emas)", "Istana Merdeka", "Alhambra", "Topkapi"], correctIndex: 0 },
+      { id: 'h2-3', text: "Sistem pos dan intelijen yang dikembangkan Al-Mansur disebut...", options: ["Barid", "Diwan", "Syurthah", "Qadhi"], correctIndex: 0 }
     ],
     3: [
-      { id: 'h3-1', text: "Penggunaan 'Idza qiila' (Pasif) menunjukkan bahwa perintah melapangkan...", options: ["Bisa datang dari siapa saja (Allah, Rasul, atau pemimpin)", "Hanya dari Allah", "Tidak penting", "Hanya saran"], correctIndex: 0 },
-      { id: 'h3-2', text: "Kata 'Khabir' menyiratkan pengetahuan Allah yang...", options: ["Sangat mendalam/teliti sampai ke batin", "Hanya luaran", "Terbatas waktu", "Sekilas"], correctIndex: 0 },
-      { id: 'h3-3', text: "Hubungan 'Fafsahuu' dan 'Yafsahillahu' adalah bentuk...", options: ["Sebab-Akibat (Jaza')", "Pertanyaan", "Sumpah", "Larangan"], correctIndex: 0 }
+      { id: 'h3-1', text: "Peristiwa tragis jatuhnya keluarga Barmaki disebut...", options: ["Tragedi Barmak", "Perang Saudara", "Revolusi Zanj", "Fitnah Kubra"], correctIndex: 0 },
+      { id: 'h3-2', text: "Era Harun Ar-Rasyid juga diwarnai pemberontakan kaum...", options: ["Khawarij", "Salibis", "Zionis", "Komunis"], correctIndex: 0 },
+      { id: 'h3-3', text: "Perang saudara antara Al-Amin dan Al-Ma'mun memperebutkan tahta disebut...", options: ["Perang Saudara Abbasiyah Keempat", "Perang Salib", "Perang Uhud", "Perang Riddah"], correctIndex: 0 }
     ],
     4: [
-      { id: 'h4-1', text: "Analisis tajwid: 'Fafsahuu yafsahillahu'. Huruf Ha (ح) adalah huruf...", options: ["Halqi (Tenggorokan)", "Syafawi (Bibir)", "Lisan (Lidah)", "Khaisyum (Hidung)"], correctIndex: 0 },
-      { id: 'h4-2', text: "Pada 'Ta'maluuna', mad yang terjadi adalah...", options: ["Mad Thabi'i", "Mad Badal", "Mad Silah", "Mad Lazim"], correctIndex: 0 },
-      { id: 'h4-3', text: "Wakaf yang tepat di akhir ayat ini adalah...", options: ["Wakaf Jaiz", "Wakaf Lazim", "Wakaf Mamnu'", "Wakaf Saktah"], correctIndex: 0 }
+      { id: 'h4-1', text: "Aliran teologi rasionalis yang didukung Al-Ma'mun adalah...", options: ["Mu'tazilah", "Asy'ariyah", "Jabariyah", "Qadariyah"], correctIndex: 0 },
+      { id: 'h4-2', text: "Ujian akidah (inkuisisi) yang diterapkan Al-Ma'mun disebut...", options: ["Mihnah", "Fitnah", "Hijrah", "Jihad"], correctIndex: 0 },
+      { id: 'h4-3', text: "Pengukur keliling bumi yang ditugaskan Al-Ma'mun berhasil menghitungnya di padang...", options: ["Sinjar", "Arafah", "Sahara", "Gobi"], correctIndex: 0 }
     ],
     5: [
-      { id: 'h5-1', text: "Korelasi antara 'Melapangkan majelis' dan 'Diangkat derajat' adalah...", options: ["Sikap tawadhu (rendah hati) mengangkat derajat seseorang", "Fisik yang kuat", "Kekayaan", "Kepintaran berdebat"], correctIndex: 0 },
-      { id: 'h5-2', text: "Mengapa 'Alladzina utul ilma' disebut setelah 'Alladzina aamanu'?", options: ["Karena ilmu adalah sifat khusus setelah sifat umum (iman)", "Ilmu tidak penting", "Iman tidak penting", "Hanya pelengkap"], correctIndex: 0 },
-      { id: 'h5-3', text: "Ayat ini turun berkenaan dengan para sahabat ahli Badar yang...", options: ["Tidak mendapat tempat duduk", "Minta makanan", "Ingin pulang", "Tertidur"], correctIndex: 0 }
+      { id: 'h5-1', text: "Karya Al-Biruni yang membahas tentang India berjudul...", options: ["Tahqiq ma li al-Hind", "Al-Hind", "Indica", "Sejarah India"], correctIndex: 0 },
+      { id: 'h5-2', text: "Penemu asam sulfat dan alkohol dalam dunia kimia Islam adalah...", options: ["Jabir ibn Hayyan", "Al-Razi", "Ibn Sina", "Al-Farabi"], correctIndex: 0 },
+      { id: 'h5-3', text: "Filsuf yang dijuluki 'Guru Kedua' (Al-Mu'allim Ats-Tsani) setelah Aristoteles adalah...", options: ["Al-Farabi", "Al-Kindi", "Ibn Rusyd", "Al-Ghazali"], correctIndex: 0 }
     ],
     6: [
-      { id: 'h6-1', text: "Nilai demokratis dalam ayat ini terlihat dari...", options: ["Penghormatan hak orang lain dalam majelis", "Pemilihan pemimpin", "Pembagian harta", "Kebebasan bicara"], correctIndex: 0 },
-      { id: 'h6-2', text: "Implikasi 'Yafsahillahu lakum' (Allah melapangkan bagimu) meliputi...", options: ["Kelapangan hati, rezeki, dan kubur", "Hanya rezeki uang", "Hanya rumah luas", "Hanya umur panjang"], correctIndex: 0 },
-      { id: 'h6-3', text: "Syarat utama diangkat derajat menurut ayat ini adalah...", options: ["Iman dan Ilmu yang terintegrasi", "Harta yang banyak", "Jabatan tinggi", "Keturunan bangsawan"], correctIndex: 0 }
+      { id: 'h6-1', text: "Masjid Agung Samarra memiliki menara spiral yang terinspirasi dari bangunan...", options: ["Ziggurat Mesopotamia", "Piramida Mesir", "Kuil Yunani", "Stupa India"], correctIndex: 0 },
+      { id: 'h6-2', text: "Seni keramik Abbasiyah menemukan teknik glasir logam yang disebut...", options: ["Lustreware", "Earthenware", "Stoneware", "Porcelain"], correctIndex: 0 },
+      { id: 'h6-3', text: "Penyair terkenal yang hidup hedonis di masa ini adalah...", options: ["Abu Nuwas", "Al-Mutanabbi", "Jalaludin Rumi", "Hafiz"], correctIndex: 0 }
     ],
     7: [
-      { id: 'h7-1', text: "Sikap 'Altruisme' (mementingkan orang lain) dalam ayat ini adalah...", options: ["Memberi tempat duduk pada orang lain", "Mengambil hak orang", "Masa bodoh", "Duduk sendiri"], correctIndex: 0 },
-      { id: 'h7-2', text: "Dalam konteks modern, 'Tafassahu fil majalis' bisa diterapkan dalam...", options: ["Memberi kesempatan bicara dalam rapat/diskusi", "Mematikan mik orang lain", "Keluar dari grup WA", "Spam chat"], correctIndex: 0 },
-      { id: 'h7-3', text: "Seorang ilmuwan yang beriman akan menggunakan ilmunya untuk...", options: ["Kemaslahatan umat dan mendekatkan diri pada Allah", "Membuat kerusakan", "Menipu orang", "Mencari kekayaan pribadi semata"], correctIndex: 0 }
+      { id: 'h7-1', text: "Khalifah terakhir yang terbunuh saat penyerbuan Mongol adalah...", options: ["Al-Musta'shim", "Al-Mustansir", "Al-Muqtadir", "Al-Mutawakkil"], correctIndex: 0 },
+      { id: 'h7-2', text: "Kelemahan militer Abbasiyah disebabkan ketergantungan pada tentara bayaran bangsa...", options: ["Turki", "Persia", "Berber", "Slavia"], correctIndex: 0 },
+      { id: 'h7-3', text: "Setelah Baghdad jatuh, kekhalifahan bayangan Abbasiyah diteruskan di...", options: ["Kairo (Mamluk)", "Damaskus", "Cordoba", "Istanbul"], correctIndex: 0 }
     ]
   }
 };
