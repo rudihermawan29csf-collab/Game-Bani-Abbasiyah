@@ -6,10 +6,11 @@ export enum ScreenState {
   CHARACTER_SELECT = 'CHARACTER_SELECT',
   MAP = 'MAP',
   LEVEL_INTRO = 'LEVEL_INTRO',
-  LOADING = 'LOADING', // Added Loading State
+  LOADING = 'LOADING',
   GAMEPLAY = 'GAMEPLAY',
   EVALUATION = 'EVALUATION',
   REWARD = 'REWARD',
+  GALLERY = 'GALLERY' // New Screen for Visual Learning
 }
 
 export enum LevelType {
@@ -22,7 +23,8 @@ export enum LevelType {
 export enum Difficulty {
   EASY = 'EASY',
   MEDIUM = 'MEDIUM',
-  HARD = 'HARD'
+  HARD = 'HARD',
+  ETHICS = 'ETHICS'
 }
 
 export interface Character {
@@ -37,8 +39,8 @@ export interface UserProfile {
   username: string;
   rank: string;
   score: number;
-  lastScore?: number; // New field for previous run score
-  levelProgress: number; // 0, 1, 2, 3, 4
+  lastScore?: number;
+  levelProgress: number;
   characterId?: string;
   difficulty: Difficulty;
 }
@@ -50,19 +52,7 @@ export interface LevelConfig {
   type: LevelType;
   description: string;
   maxScore: number;
-  image: string; // New field for Level Visualization
-}
-
-export interface VocabPair {
-  id: string;
-  arabic: string;
-  meaning: string;
-}
-
-export interface VersePart {
-  id: string;
-  text: string;
-  order: number;
+  image: string;
 }
 
 export interface Question {
@@ -70,4 +60,12 @@ export interface Question {
   text: string;
   options: string[];
   correctIndex: number;
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
 }

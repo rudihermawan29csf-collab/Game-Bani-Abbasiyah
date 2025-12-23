@@ -1,280 +1,248 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Question, UserProfile } from '../types';
-import { CHARACTERS } from '../constants';
 import { WeaponOverlay } from './UI';
 import { sfx } from '../audio';
 import { 
-  DoorOpen, BookOpen, FlaskConical, Cog, Wind, 
-  AlertTriangle, Package, ShieldAlert, Target,
-  CheckCircle2, XCircle, Timer as TimerIcon
+  CheckCircle2, XCircle, Timer as TimerIcon, 
+  Zap, Radio, Flame, Cpu
 } from 'lucide-react';
 
-const TopRightHUD = ({ user, currentScore, timeLeft }: { user: UserProfile, currentScore: number, timeLeft: number }) => {
-    const char = CHARACTERS.find(c => c.id === user.characterId) || CHARACTERS[0];
-    const isUrgent = timeLeft <= 10;
-    
+const TopHUD = ({ user, score, timeLeft }: { user: UserProfile, score: number, timeLeft: number }) => (
+    <div className="absolute top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 z-40 flex justify-between items-start pointer-events-none">
+        <div className="bg-black/85 border-l-2 md:border-l-4 border-lime-500 p-1.5 md:p-3 backdrop-blur-md shadow-[0_0_15px_rgba(132,204,22,0.3)]">
+            <div className="text-[7px] md:text-[10px] text-slate-500 font-mono">USER_{user.username.toUpperCase()}</div>
+            <div className="text-sm md:text-3xl font-ops text-lime-400">{score.toString().padStart(6, '0')}</div>
+        </div>
+        <div className={`bg-black/85 border-r-2 md:border-r-4 ${timeLeft < 10 ? 'border-red-500 animate-pulse' : 'border-cyan-500'} p-1.5 md:p-3 backdrop-blur-md text-right shadow-[0_0_15px_rgba(6,182,212,0.3)]`}>
+            <div className="text-[7px] md:text-[10px] text-slate-500 font-mono flex items-center justify-end gap-1">
+                <TimerIcon size={8} /> SYNC_CLOCK
+            </div>
+            <div className={`text-sm md:text-3xl font-ops ${timeLeft < 10 ? 'text-red-500' : 'text-cyan-400'}`}>00:{timeLeft.toString().padStart(2, '0')}</div>
+        </div>
+    </div>
+);
+
+// High-Vibrancy 3D Neon Target
+const SkullEnemy = ({ isActive, isCorrect, isWrong, tilt }: { isActive: boolean, isCorrect: boolean, isWrong: boolean, tilt: number }) => {
+    // Determine base colors based on state
+    const themeColor = isCorrect ? 'text-green-400' : isWrong ? 'text-red-500' : 'text-lime-400';
+    const borderColor = isCorrect ? 'border-green-400' : isWrong ? 'border-red-500' : 'border-lime-500';
+    const glowColor = isCorrect ? 'shadow-[0_0_30px_rgba(74,222,128,0.8)]' : isWrong ? 'shadow-[0_0_30px_rgba(239,68,68,0.8)]' : 'shadow-[0_0_20px_rgba(163,230,53,0.6)]';
+
     return (
-        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 flex items-center gap-2 pointer-events-none">
-            <div className="text-right flex flex-col gap-1">
-                <div className="bg-black/60 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1 rounded border-l-4 border-yellow-500 shadow-lg">
-                     <div className="text-yellow-400 font-ops text-lg md:text-2xl tracking-widest drop-shadow-[0_0_5px_rgba(234,179,8,0.8)]">{currentScore}</div>
-                </div>
-                <div className={`bg-black/60 backdrop-blur-sm px-2 py-1 rounded border-l-4 ${isUrgent ? 'border-red-500 animate-pulse' : 'border-cyan-500'} shadow-lg flex items-center gap-2`}>
-                     <TimerIcon size={14} className={isUrgent ? 'text-red-500' : 'text-cyan-400'} />
-                     <div className={`font-ops text-sm md:text-lg tracking-widest ${isUrgent ? 'text-red-500' : 'text-cyan-400'}`}>00:{timeLeft.toString().padStart(2, '0')}</div>
+        <div className="relative flex flex-col items-center justify-center transition-all duration-300 transform-gpu"
+             style={{ 
+                transform: `rotateY(${tilt}deg) rotateX(${tilt/2}deg)`,
+                perspective: '800px',
+                transformStyle: 'preserve-3d'
+             }}>
+            
+            {/* CORE GLOW AURA */}
+            <div className={`absolute -z-20 w-12 h-12 md:w-20 md:h-20 rounded-full blur-2xl animate-pulse transition-colors duration-500 ${isCorrect ? 'bg-green-500/40' : isWrong ? 'bg-red-500/40' : 'bg-lime-500/30'}`}></div>
+
+            {/* NEON MECHANICAL WINGS */}
+            <div className="absolute -z-10 flex gap-4 md:gap-8 opacity-90 transition-transform duration-500" style={{ transform: 'translateZ(-10px)' }}>
+                <div className={`w-8 h-12 md:w-16 md:h-20 bg-slate-900/60 clip-wing-left transform -rotate-12 border-l-[3px] md:border-l-4 ${borderColor} ${glowColor}`}></div>
+                <div className={`w-8 h-12 md:w-16 md:h-20 bg-slate-900/60 clip-wing-right transform rotate-12 border-r-[3px] md:border-r-4 ${borderColor} ${glowColor}`}></div>
+            </div>
+
+            {/* FLOATING ENERGY RING */}
+            <div className={`absolute -inset-3 md:-inset-6 border-[1px] md:border-2 rounded-full ${borderColor} opacity-60 animate-[spin_8s_linear_infinite]`} style={{ transform: 'translateZ(15px)' }}>
+                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-1 md:w-2 h-1 md:h-2 rounded-full ${isCorrect ? 'bg-green-400' : 'bg-lime-400'} shadow-[0_0_10px_white]`}></div>
+            </div>
+
+            {/* MAIN UNIT BODY */}
+            <div className={`relative w-14 h-14 md:w-24 md:h-24 bg-gradient-to-br from-slate-800 via-slate-900 to-black border-[2px] md:border-[3px] rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 ${borderColor} ${glowColor}`} 
+                 style={{ transform: 'translateZ(30px)' }}>
+                
+                {/* 3D Glass / Scanner Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-30"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+
+                <div className="absolute inset-0 flex flex-col items-center pt-1 md:pt-2">
+                    <Cpu className={`${themeColor} animate-pulse mb-[-2px] md:mb-[-4px] z-20 drop-shadow-[0_0_8px_currentColor]`} size={16} />
+                    
+                    {/* Head Segment */}
+                    <div className="w-10 h-8 md:w-16 md:h-12 bg-slate-800 rounded-t-full border-x border-slate-600 relative z-10 shadow-inner flex items-center justify-center">
+                        <div className="w-6 h-1 bg-cyan-400/30 rounded-full animate-pulse"></div>
+                    </div>
+                    
+                    {/* Visor / Eye Segment */}
+                    <div className="w-full h-8 md:h-14 bg-slate-950 border-t border-slate-700 flex flex-col items-center justify-center gap-1">
+                        <div className="flex gap-2 md:gap-4">
+                            <div className={`w-2 h-1.5 md:w-4 md:h-2.5 rounded-full animate-[pulse_0.5s_infinite] ${isWrong ? 'bg-red-500 shadow-[0_0_12px_red]' : 'bg-cyan-500 shadow-[0_0_12px_cyan]'}`}></div>
+                            <div className={`w-2 h-1.5 md:w-4 md:h-2.5 rounded-full animate-[pulse_0.5s_infinite] ${isWrong ? 'bg-red-500 shadow-[0_0_12px_red]' : 'bg-cyan-500 shadow-[0_0_12px_cyan]'}`}></div>
+                        </div>
+                        {/* Status Light */}
+                        <div className={`h-0.5 w-8 md:w-12 rounded-full ${isCorrect ? 'bg-green-500' : 'bg-lime-500'} animate-pulse`}></div>
+                    </div>
                 </div>
             </div>
-            <div className="relative">
-                <img 
-                    src={char.image} 
-                    alt="Agent" 
-                    className="w-8 h-8 md:w-16 md:h-16 rounded-full border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] bg-slate-800 object-cover"
-                />
-            </div>
+
+            {/* FLOOR ENERGY SHADOW */}
+            <div className={`w-10 md:w-20 h-1.5 rounded-full mt-3 blur-md transition-all duration-500 ${isCorrect ? 'bg-green-500/60 shadow-[0_0_15px_lime]' : isWrong ? 'bg-red-500/60 shadow-[0_0_15px_red]' : 'bg-lime-500/40 shadow-[0_0_10px_rgba(163,230,53,0.5)]'}`}></div>
         </div>
     );
 };
 
-interface LevelEngineProps {
-  data: Question[];
-  user: UserProfile;
-  levelId?: number; 
-  onComplete: (score: number) => void;
-  onDamage: (mistake: { question: string, correct: string }) => void;
-}
-
-export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, levelId = 1, onComplete, onDamage }) => {
+export const UniversalLevelEngine = ({ data, user, levelId, onComplete, onDamage }: any) => {
   const [qIndex, setQIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [showFeedback, setShowFeedback] = useState<'correct' | 'wrong' | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [showScorePopup, setShowScorePopup] = useState(false);
-  const [lastAddedScore, setLastAddedScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(30);
 
   const currentQ = data[qIndex];
-  const progress = ((qIndex) / data.length) * 100;
-  // Fix: Used ReturnType<typeof setInterval> instead of NodeJS.Timeout to fix "Cannot find namespace 'NodeJS'" error
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef = useRef<any>(null);
 
-  // --- TIMER LOGIC ---
+  const layouts = useMemo(() => {
+    // Restricted middle zone for mobile safety (avoiding HUD and bottom panel)
+    return currentQ.options.map((_: any, i: number) => {
+        const quadrantX = i % 2 === 0 ? 8 : 52; 
+        const quadrantY = i < 2 ? 18 : 42; 
+        return {
+            x: quadrantX + Math.random() * 12,
+            y: quadrantY + Math.random() * 4,
+            tilt: (Math.random() - 0.5) * 25
+        };
+    });
+  }, [qIndex]);
+
   useEffect(() => {
-    // Reset timer when question changes
-    setTimeLeft(60);
+    setTimeLeft(30);
     if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+        setTimeLeft(p => {
+            if (p <= 1) { handleAnswer(-1); return 0; }
+            return p - 1;
+        });
+    }, 1000);
+    return () => clearInterval(timerRef.current);
+  }, [qIndex]);
 
-    if (!isTransitioning) {
-        timerRef.current = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev <= 1) {
-                    if (timerRef.current) clearInterval(timerRef.current);
-                    handleTimeOut();
-                    return 0;
-                }
-                const newTime = prev - 1;
-                // Play ticking sound
-                sfx.tick(newTime <= 10);
-                return newTime;
-            });
-        }, 1000);
-    }
-
-    return () => {
-        if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [qIndex, isTransitioning]);
-
-  const handleTimeOut = () => {
+  const handleAnswer = (idx: number) => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setShowFeedback('wrong');
-    sfx.error();
+    setSelectedIndex(idx);
+    clearInterval(timerRef.current);
+    
+    const isCorrect = idx === currentQ.correctIndex;
+    if (isCorrect) {
+        sfx.hit();
+        setScore(s => s + (100 + timeLeft * 5));
+    } else {
+        sfx.error();
+        onDamage({ question: currentQ.text, correct: currentQ.options[currentQ.correctIndex] });
+    }
 
-    const correctAnswerText = currentQ.options[currentQ.correctIndex];
-    onDamage({ question: currentQ.text + " (TIMEOUT)", correct: correctAnswerText });
+    window.dispatchEvent(new CustomEvent('weapon-fire'));
 
     setTimeout(() => {
-        if (qIndex < data.length - 1) {
-            setQIndex(prev => prev + 1);
-        } else {
-            onComplete(score);
-        }
+        setIsTransitioning(false);
+        setSelectedIndex(null);
+        if (qIndex < data.length - 1) setQIndex(qIndex + 1);
+        else onComplete(score);
     }, 1500);
   };
 
-  useEffect(() => {
-    setSelectedIndex(null);
-    setShowFeedback(null);
-    setIsTransitioning(false);
-  }, [qIndex]);
-
-  const getThemeIcon = (id: number) => {
-    switch(id) {
-        case 1: return DoorOpen;
-        case 2: return BookOpen;
-        case 3: return FlaskConical;
-        case 4: return Cog;
-        case 5: return Wind;
-        case 6: return AlertTriangle;
-        case 7: return Package;
-        default: return ShieldAlert;
-    }
-  };
-
-  const ThemeIcon = getThemeIcon(levelId);
-
-  const handleAnswer = (index: number) => {
-    if (isTransitioning) return;
-    
-    // Stop timer
-    if (timerRef.current) clearInterval(timerRef.current);
-    
-    // Trigger Audio
-    sfx.click();
-
-    // Visual Fire Effect
-    const event = new CustomEvent('weapon-fire');
-    window.dispatchEvent(event);
-
-    setSelectedIndex(index);
-    setIsTransitioning(true);
-
-    if (index === currentQ.correctIndex) {
-      setShowFeedback('correct');
-      sfx.hit(); 
-      
-      const difficultyMultiplier = user.difficulty === 'HARD' ? 300 : user.difficulty === 'MEDIUM' ? 200 : 100;
-      // Bonus points for speed
-      const timeBonus = Math.floor(timeLeft * 2);
-      const basePoints = difficultyMultiplier + timeBonus;
-      
-      setScore(prev => prev + basePoints);
-      setLastAddedScore(basePoints);
-      setShowScorePopup(true);
-
-      setTimeout(() => {
-        setShowScorePopup(false);
-        if (qIndex < data.length - 1) {
-            setQIndex(prev => prev + 1);
-        } else {
-            onComplete(score + basePoints);
-        }
-      }, 1500);
-
-    } else {
-      setShowFeedback('wrong');
-      sfx.error(); 
-      
-      const correctAnswerText = currentQ.options[currentQ.correctIndex];
-      onDamage({ question: currentQ.text, correct: correctAnswerText });
-      
-      setTimeout(() => {
-         if (qIndex < data.length - 1) {
-             setQIndex(prev => prev + 1);
-         } else {
-             onComplete(score);
-         }
-      }, 1500);
-    }
-  };
-
-  if (!currentQ) return <div className="text-white text-center">Loading Data...</div>;
-
   return (
-    <div className={`relative w-full h-full flex flex-col justify-between max-w-5xl mx-auto transition-colors duration-300 ${timeLeft <= 10 && !isTransitioning ? 'timer-urgent' : ''}`}>
-      <WeaponOverlay />
-      <TopRightHUD user={user} currentScore={score} timeLeft={timeLeft} />
+    <div className="relative w-full h-full flex flex-col overflow-hidden">
+        <WeaponOverlay />
+        <TopHUD user={user} score={score} timeLeft={timeLeft} />
 
-      {showScorePopup && (
-         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-[60] animate-bounce pointer-events-none">
-             <div className="text-4xl md:text-7xl font-ops text-yellow-400 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)] stroke-black">
-                 +{lastAddedScore}
-             </div>
-         </div>
-      )}
+        {/* BATTLEFIELD */}
+        <div className="absolute inset-0 z-20 pointer-events-none" style={{ perspective: '1200px' }}>
+            {currentQ.options.map((opt: string, idx: number) => {
+                const layout = layouts[idx];
+                const isSelected = selectedIndex === idx;
+                const isCorrect = idx === currentQ.correctIndex;
+                const reveal = isTransitioning;
 
-      <div className="relative z-30 w-full mt-8 md:mt-16 mb-2 animate-in slide-in-from-top-5 duration-500">
-          <div className="bg-slate-900/80 border-2 border-slate-600 p-3 md:p-8 rounded-xl shadow-2xl relative overflow-hidden backdrop-blur-md min-h-[100px] md:min-h-[160px] flex items-center justify-center text-center">
-              <div className="absolute top-0 left-0 h-1 bg-slate-700 w-full">
-                  <div className="h-full bg-yellow-500 transition-all duration-500" style={{ width: `${progress}%` }}></div>
-              </div>
-              
-              <div className="relative z-10 w-full">
-                  <div className="flex justify-center mb-1 text-slate-400 items-center gap-2">
-                       <Target size={12} className="animate-pulse" />
-                       <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase">TARGET {qIndex + 1}/{data.length}</span>
-                  </div>
-                  <h2 className="text-base md:text-3xl font-bold text-white leading-tight drop-shadow-md px-4">
-                      {currentQ.text}
-                  </h2>
-              </div>
+                return (
+                    <div key={idx} className="absolute pointer-events-auto transition-all duration-700"
+                         style={{ left: `${layout.x}%`, top: `${layout.y}%`, transformStyle: 'preserve-3d' }}>
+                        
+                        <div className="flex flex-col items-center">
+                            {/* TACTICAL LABEL */}
+                            <div className={`mb-4 px-3 py-1 md:px-5 md:py-2 transition-all duration-300 relative
+                                bg-black/90 border-l-[3px] md:border-l-4 border-lime-500 backdrop-blur-md shadow-[0_0_20px_rgba(163,230,53,0.3)]
+                                ${reveal && !isSelected && !isCorrect ? 'opacity-0 scale-50' : 'opacity-100 scale-100'}
+                            `}>
+                                <div className={`
+                                    font-ops text-[11px] md:text-sm uppercase tracking-tighter whitespace-nowrap drop-shadow-[0_0_5px_rgba(0,0,0,1)]
+                                    ${reveal ? (isCorrect ? 'text-green-400' : 'text-red-500') : 'text-lime-gradient'}
+                                `}>
+                                    {opt}
+                                </div>
+                                {reveal && isCorrect && <CheckCircle2 className="absolute -right-7 top-1/2 -translate-y-1/2 text-green-400 animate-bounce" size={18} />}
+                                {reveal && isSelected && !isCorrect && <XCircle className="absolute -right-7 top-1/2 -translate-y-1/2 text-red-500 animate-shake" size={18} />}
+                            </div>
 
-              <ThemeIcon className="absolute top-2 left-2 text-slate-700/50 w-6 h-6 md:w-16 md:h-16" />
-              <ThemeIcon className="absolute bottom-2 right-2 text-slate-700/50 w-6 h-6 md:w-16 md:h-16 transform rotate-180" />
-          </div>
-      </div>
+                            <button 
+                                onClick={() => handleAnswer(idx)} 
+                                disabled={isTransitioning}
+                                className={`transition-all duration-300 ${reveal && !isSelected && !isCorrect ? 'opacity-0 translate-y-20' : 'hover:scale-110 active:scale-95'}`}
+                            >
+                                <SkullEnemy 
+                                    isActive={!isTransitioning} 
+                                    isCorrect={reveal && isCorrect} 
+                                    isWrong={reveal && isSelected && !isCorrect} 
+                                    tilt={layout.tilt}
+                                />
+                            </button>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 relative z-30 pb-16 md:pb-0 overflow-y-auto max-h-[60vh] md:max-h-none scrollbar-hide px-1">
-          {currentQ.options.map((option, idx) => {
-              const isSelected = selectedIndex === idx;
-              const isCorrect = idx === currentQ.correctIndex;
-              
-              let btnStyle = "border-slate-500 hover:border-yellow-400 bg-slate-800/90";
-              let icon = null;
+        {/* BOTTOM QUESTION PANEL - Optimized for mobile visibility */}
+        <div className="absolute bottom-24 md:bottom-20 left-0 right-0 z-40 p-4 md:p-6 flex flex-col items-center pointer-events-none">
+            <div className="w-full max-w-2xl bg-slate-950/95 border-t-[3px] md:border-t-4 border-lime-600 p-3 md:p-6 rounded-2xl shadow-[0_-20px_70px_rgba(0,0,0,1)] backdrop-blur-2xl pointer-events-auto">
+                <div className="flex items-center gap-2 mb-2">
+                    <div className="p-0.5 bg-lime-600 rounded">
+                        <Zap className="text-white animate-pulse" size={10} />
+                    </div>
+                    <span className="font-mono text-[6px] md:text-[8px] text-lime-400 tracking-[0.1em] uppercase font-bold opacity-70">INTEL_DB // SEC_0{levelId}</span>
+                </div>
+                <div className="bg-slate-900 border-2 border-slate-700/80 p-4 md:p-6 rounded-xl relative overflow-hidden shadow-inner ring-1 ring-lime-500/20">
+                    <div className="absolute top-0 left-0 h-1 bg-slate-800 w-full">
+                        <div className="h-full bg-lime-500 shadow-[0_0_15px_#84cc16] transition-all duration-700" style={{ width: `${(qIndex / data.length) * 100}%` }}></div>
+                    </div>
+                    <h2 className="text-sm md:text-2xl font-bold text-white text-center leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        {currentQ.text}
+                    </h2>
+                </div>
+                <div className="mt-2 flex justify-between items-center px-1">
+                    <div className="flex gap-1">
+                        {[...Array(data.length)].map((_, i) => (
+                            <div key={i} className={`h-1 w-4 md:w-6 rounded-full transition-all duration-300 ${i <= qIndex ? 'bg-lime-500 shadow-[0_0_5px_lime]' : 'bg-slate-800'}`}></div>
+                        ))}
+                    </div>
+                    <div className="text-[8px] font-mono text-slate-500 font-bold uppercase tracking-widest">MSG_{qIndex + 1}/{data.length}</div>
+                </div>
+            </div>
+        </div>
 
-              if (isTransitioning) {
-                  if (isSelected && isCorrect) {
-                      btnStyle = "border-green-500 bg-green-900/90 shadow-[0_0_20px_lime]";
-                      icon = <CheckCircle2 className="text-green-400 w-5 h-5 md:w-6 md:h-6 shrink-0" />;
-                  } else if (isSelected && !isCorrect) {
-                      btnStyle = "border-red-500 bg-red-900/90 shadow-[0_0_20px_red]";
-                      icon = <XCircle className="text-red-400 w-5 h-5 md:w-6 md:h-6 shrink-0" />;
-                  } else if (!isSelected && isCorrect && showFeedback) {
-                      btnStyle = "border-green-500 bg-green-900/40 opacity-70";
-                  } else {
-                      btnStyle = "opacity-50 grayscale";
-                  }
-              }
-
-              return (
-                  <button
-                      key={idx}
-                      onClick={() => handleAnswer(idx)}
-                      disabled={isTransitioning}
-                      className={`
-                          relative group w-full 
-                          p-2 md:p-6 
-                          border-2 rounded-lg 
-                          flex items-center justify-between gap-2 md:gap-3
-                          transition-all duration-200 
-                          active:scale-95
-                          min-h-[50px] md:min-h-[80px] h-auto
-                          ${btnStyle}
-                      `}
-                  >
-                      <div className={`
-                          w-6 h-6 md:w-8 md:h-8 rounded bg-slate-900 border border-slate-600 
-                          flex items-center justify-center font-ops text-slate-500 shrink-0
-                          text-xs md:text-base
-                          ${isSelected ? 'bg-yellow-500 text-black border-yellow-500' : ''}
-                      `}>
-                          {String.fromCharCode(65 + idx)}
-                      </div>
-
-                      <span className={`
-                          flex-grow text-left font-bold leading-tight whitespace-normal break-words
-                          text-[11px] sm:text-xs md:text-lg lg:text-xl
-                          ${isSelected ? 'text-white' : 'text-slate-200'}
-                      `}>
-                          {option}
-                      </span>
-
-                      {icon && <div className="animate-in zoom-in spin-in-90 duration-300">{icon}</div>}
-                  </button>
-              );
-          })}
-      </div>
+        <style>{`
+            .text-lime-gradient {
+                background: linear-gradient(to bottom, #bef264 0%, #84cc16 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .clip-wing-left { clip-path: polygon(0 0, 100% 20%, 100% 100%, 20% 80%); }
+            .clip-wing-right { clip-path: polygon(0 20%, 100% 0, 80% 80%, 0 100%); }
+            @keyframes animate-shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-6px); }
+                75% { transform: translateX(6px); }
+            }
+            .animate-shake { animation: animate-shake 0.2s infinite; }
+            .translate-z-[-10px] { transform: translateZ(-10px); }
+            .translate-z-[15px] { transform: translateZ(15px); }
+            .translate-z-[30px] { transform: translateZ(30px); }
+        `}</style>
     </div>
   );
 };
