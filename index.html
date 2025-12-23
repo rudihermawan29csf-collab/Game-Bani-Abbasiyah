@@ -10,9 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sab: env(safe-area-inset-bottom);
+        --sal: env(safe-area-inset-left);
+        --sar: env(safe-area-inset-right);
+      }
+
       html, body, #root {
         height: 100%;
+        height: 100dvh; /* Dynamic Viewport Height for mobile browsers */
         width: 100%;
+        margin: 0;
+        padding: 0;
       }
       body {
         font-family: 'Rajdhani', sans-serif;
@@ -21,7 +31,15 @@
         overflow: hidden; /* Prevent scrolling in game */
         cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Crosshair_Red.png') 16 16, crosshair;
         touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
       }
+      
+      /* Utilities for Safe Areas */
+      .pt-safe { padding-top: max(1rem, var(--sat)); }
+      .pb-safe { padding-bottom: max(1rem, var(--sab)); }
+      .pl-safe { padding-left: max(0.5rem, var(--sal)); }
+      .pr-safe { padding-right: max(0.5rem, var(--sar)); }
+
       button, a, .cursor-pointer {
         cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Crosshair_Red.png') 16 16, pointer !important;
       }

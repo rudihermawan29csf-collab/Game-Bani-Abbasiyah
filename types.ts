@@ -2,6 +2,8 @@
 export enum ScreenState {
   TITLE = 'TITLE',
   LOGIN = 'LOGIN',
+  MISSION = 'MISSION', // New Screen: Tujuan Pembelajaran
+  TUTORIAL = 'TUTORIAL', // New Screen: Cara Bermain
   DIFFICULTY_SELECT = 'DIFFICULTY_SELECT',
   CHARACTER_SELECT = 'CHARACTER_SELECT',
   MAP = 'MAP',
@@ -10,7 +12,7 @@ export enum ScreenState {
   GAMEPLAY = 'GAMEPLAY',
   EVALUATION = 'EVALUATION',
   REWARD = 'REWARD',
-  GALLERY = 'GALLERY' // New Screen for Visual Learning
+  GALLERY = 'GALLERY'
 }
 
 export enum LevelType {
@@ -37,6 +39,7 @@ export interface Character {
 
 export interface UserProfile {
   username: string;
+  school: string; // New field
   rank: string;
   score: number;
   lastScore?: number;
