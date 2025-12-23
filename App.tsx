@@ -170,65 +170,74 @@ const GalleryScreen = ({ onBack }: { onBack: () => void }) => {
   const isAudioReady = !!audioCache[currentItem.id];
 
   return (
-    <div className="h-[100dvh] w-full bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center opacity-30 blur-sm scale-110 transition-all duration-1000" style={{ backgroundImage: `url('${currentItem.image}')` }}></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80"></div>
-      
-      <div className="z-20 w-full max-w-6xl flex flex-col lg:flex-row gap-8 items-center h-full max-h-[85vh]">
-        {/* Visual Content */}
-        <div className="w-full lg:w-1/2 h-[40vh] lg:h-full max-h-[500px] relative group flex-shrink-0">
-          <div className="absolute -inset-2 bg-yellow-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <img src={currentItem.image} alt={currentItem.title} className="w-full h-full object-cover border-2 border-yellow-500/50 rounded-lg shadow-2xl relative z-10" />
-          <div className="absolute bottom-4 left-4 z-20 bg-black/60 backdrop-blur-md px-3 py-1 border border-yellow-500/30 rounded text-yellow-500 font-mono text-xs uppercase tracking-widest">
-            {currentItem.category}
-          </div>
+    <div className="h-[100dvh] w-full bg-slate-950 flex flex-col relative overflow-hidden">
+        {/* Dynamic Background */}
+        <div className="absolute inset-0 bg-cover bg-center opacity-30 blur-sm scale-110 transition-all duration-1000" style={{ backgroundImage: `url('${currentItem.image}')` }}></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/50 to-black/90"></div>
+
+        {/* TOP BAR: Navigation & Progress */}
+        <div className="z-30 w-full px-3 py-2 md:px-4 md:py-3 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-white/10 shrink-0">
+            <button onClick={onBack} className="flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded-full transition-all font-ops text-xs md:text-sm uppercase border border-transparent hover:border-slate-500">
+                <ChevronLeft size={16} /> <span className="hidden sm:inline">Kembali</span>
+            </button>
+            
+            <div className="flex gap-1">
+                {GALLERY_DATA.map((_, i) => (
+                <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'w-4 md:w-6 bg-yellow-500 shadow-[0_0_8px_yellow]' : 'w-1.5 md:w-2 bg-slate-600'}`}></div>
+                ))}
+            </div>
         </div>
 
-        {/* Textual Info */}
-        <div className="w-full lg:w-1/2 flex flex-col h-full lg:justify-center overflow-y-auto lg:overflow-visible">
-          <div className="mb-2 flex items-center gap-2">
-            <div className="h-px w-8 bg-yellow-500"></div>
-            <span className="text-yellow-500 font-mono text-xs uppercase tracking-widest">Visual Archive {String(currentIndex + 1).padStart(2, '0')}/{GALLERY_DATA.length}</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-ops text-white mb-6 uppercase tracking-tight leading-none text-fire drop-shadow-lg">{currentItem.title}</h2>
-          
-          <Panel className="border-l-4 border-yellow-500 bg-slate-900/60 mb-8 backdrop-blur-xl shadow-2xl">
-            <TypewriterText text={currentItem.description} className="text-slate-200 text-lg md:text-2xl leading-relaxed italic font-serif" />
-          </Panel>
+        {/* MAIN SCROLLABLE AREA */}
+        <div className="flex-grow flex flex-col lg:flex-row items-center justify-start lg:justify-center p-4 lg:p-8 overflow-y-auto lg:overflow-hidden gap-4 lg:gap-8 z-20 scrollbar-hide">
+            
+            {/* Image Section */}
+            <div className="w-full lg:w-1/2 aspect-video lg:aspect-square max-h-[35vh] lg:max-h-[60vh] relative shrink-0 group rounded-xl overflow-hidden border-2 border-yellow-500/30 shadow-2xl">
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none"></div>
+                 <img src={currentItem.image} alt={currentItem.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                 <div className="absolute bottom-3 left-3 z-20 bg-black/80 backdrop-blur px-3 py-1 border border-yellow-500/50 rounded text-yellow-500 font-mono text-[10px] uppercase tracking-widest flex items-center gap-2">
+                    <ImageIcon size={12} /> {currentItem.category}
+                 </div>
+            </div>
 
-          <div className="flex flex-col md:flex-row gap-4 items-center mt-auto pb-4 lg:pb-0">
-            <TacticalButton 
+            {/* Text Section */}
+            <div className="w-full lg:w-1/2 flex flex-col gap-2 lg:gap-6 pb-24 lg:pb-0">
+                <div>
+                     <div className="flex items-center gap-2 mb-1 opacity-70">
+                        <div className="h-px w-6 bg-yellow-500"></div>
+                        <span className="text-yellow-500 font-mono text-[10px] uppercase tracking-widest">DATA_ARCHIVE_0{currentIndex + 1}</span>
+                     </div>
+                     <h2 className="text-2xl md:text-5xl font-ops text-white uppercase leading-none tracking-tight text-fire drop-shadow-md">{currentItem.title}</h2>
+                </div>
+                
+                <Panel className="border-l-2 md:border-l-4 border-yellow-500 bg-slate-900/60 backdrop-blur-md p-4 lg:p-6 shadow-lg">
+                    <TypewriterText text={currentItem.description} className="text-slate-300 text-sm md:text-xl leading-relaxed italic font-serif" />
+                </Panel>
+            </div>
+        </div>
+
+        {/* BOTTOM CONTROLS (FIXED) */}
+        <div className="z-30 w-full bg-black/80 backdrop-blur-xl border-t border-white/10 p-3 lg:p-6 shrink-0 flex flex-col md:flex-row gap-3 items-center justify-between absolute bottom-0 lg:relative lg:bg-transparent lg:border-none pb-safe">
+             {/* TTS Button */}
+             <TacticalButton 
                 onClick={handleSpeak} 
                 disabled={!isAudioReady && !isSpeaking}
-                className={`flex items-center justify-center gap-3 px-6 py-4 w-full md:w-auto transition-all duration-300 ${isSpeaking ? 'bg-red-600 border-red-400 animate-pulse' : isAudioReady ? 'bg-yellow-600 border-yellow-400 hover:scale-105' : 'bg-slate-700 border-slate-500 opacity-70'}`}
+                className={`w-full md:w-auto flex-1 flex items-center justify-center gap-3 py-3 md:py-4 transition-all duration-300 ${isSpeaking ? 'bg-red-600 border-red-400 animate-pulse shadow-[0_0_15px_red]' : isAudioReady ? 'bg-yellow-600 border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.4)]' : 'bg-slate-800 border-slate-600 opacity-50'}`}
             >
-              {isSpeaking ? <Pause size={24} /> : !isAudioReady ? <Loader2 size={24} className="animate-spin" /> : <Volume2 size={24} />}
-              <span className="text-lg">{isSpeaking ? 'Hentikan Narasi' : !isAudioReady ? 'Memuat Suara...' : 'Dengarkan Narasi'}</span>
+              {isSpeaking ? <Pause size={20} /> : !isAudioReady ? <Loader2 size={20} className="animate-spin" /> : <Volume2 size={20} />}
+              <span className="text-sm md:text-lg font-bold tracking-wider">{isSpeaking ? 'STOP NARASI' : !isAudioReady ? 'MEMUAT...' : 'DENGARKAN'}</span>
             </TacticalButton>
-            
-            <div className="flex gap-2 w-full md:w-auto ml-auto justify-center">
-              <button onClick={prevItem} className="p-4 bg-slate-800 border-2 border-slate-600 text-white hover:bg-slate-700 hover:border-yellow-500 rounded-lg transition-all active:scale-95">
-                <SkipBack size={28} />
-              </button>
-              <button onClick={nextItem} className="p-4 bg-slate-800 border-2 border-slate-600 text-white hover:bg-slate-700 hover:border-yellow-500 rounded-lg transition-all active:scale-95">
-                <SkipForward size={28} />
-              </button>
-            </div>
-          </div>
+             
+             {/* Nav Buttons */}
+             <div className="flex gap-2 w-full md:w-auto lg:ml-auto">
+                 <button onClick={prevItem} className="flex-1 md:flex-none p-3 bg-slate-800 border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 hover:border-yellow-500 rounded transition-all active:scale-95 flex justify-center items-center">
+                    <SkipBack size={24} />
+                 </button>
+                 <button onClick={nextItem} className="flex-1 md:flex-none p-3 bg-slate-800 border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 hover:border-yellow-500 rounded transition-all active:scale-95 flex justify-center items-center">
+                    <SkipForward size={24} />
+                 </button>
+             </div>
         </div>
-      </div>
-
-      {/* Navigation & Controls */}
-      <button onClick={onBack} className="absolute top-4 left-4 z-30 flex items-center gap-2 text-slate-400 hover:text-white transition-colors bg-black/40 px-4 py-2 rounded-full border border-slate-700 backdrop-blur-md font-ops uppercase text-sm hover:bg-red-900/50 hover:border-red-500">
-        <ChevronLeft size={20} /> Kembali ke Markas
-      </button>
-
-      {/* Progress Bar */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-1.5 p-2 bg-black/40 rounded-full backdrop-blur-sm">
-        {GALLERY_DATA.map((_, i) => (
-          <div key={i} className={`h-1.5 transition-all duration-500 rounded-full ${i === currentIndex ? 'w-8 bg-yellow-500 shadow-[0_0_10px_yellow]' : 'w-2 bg-slate-600'}`}></div>
-        ))}
-      </div>
     </div>
   );
 };
