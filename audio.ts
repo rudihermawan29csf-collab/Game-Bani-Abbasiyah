@@ -107,6 +107,10 @@ class SoundFX {
     this.playTone(1200, 'square', 0.05, 0.05);
   }
 
+  tick(isUrgent: boolean = false) {
+    this.playTone(isUrgent ? 1500 : 800, 'sine', 0.05, isUrgent ? 0.08 : 0.03);
+  }
+
   shoot() {
     // Gunshot-like sound (noise burst + rapid decay)
     this.playNoise(0.15);

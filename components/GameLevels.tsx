@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Question, UserProfile } from '../types';
 import { CHARACTERS } from '../constants';
 import { WeaponOverlay } from './UI';
@@ -7,17 +6,22 @@ import { sfx } from '../audio';
 import { 
   DoorOpen, BookOpen, FlaskConical, Cog, Wind, 
   AlertTriangle, Package, ShieldAlert, Target,
-  CheckCircle2, XCircle, Timer
+  CheckCircle2, XCircle, Timer as TimerIcon
 } from 'lucide-react';
 
-const TopRightHUD = ({ user, currentScore }: { user: UserProfile, currentScore: number }) => {
+const TopRightHUD = ({ user, currentScore, timeLeft }: { user: UserProfile, currentScore: number, timeLeft: number }) => {
     const char = CHARACTERS.find(c => c.id === user.characterId) || CHARACTERS[0];
+    const isUrgent = timeLeft <= 10;
     
     return (
         <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 flex items-center gap-2 pointer-events-none">
-            <div className="text-right">
+            <div className="text-right flex flex-col gap-1">
                 <div className="bg-black/60 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1 rounded border-l-4 border-yellow-500 shadow-lg">
                      <div className="text-yellow-400 font-ops text-lg md:text-2xl tracking-widest drop-shadow-[0_0_5px_rgba(234,179,8,0.8)]">{currentScore}</div>
+                </div>
+                <div className={`bg-black/60 backdrop-blur-sm px-2 py-1 rounded border-l-4 ${isUrgent ? 'border-red-500 animate-pulse' : 'border-cyan-500'} shadow-lg flex items-center gap-2`}>
+                     <TimerIcon size={14} className={isUrgent ? 'text-red-500' : 'text-cyan-400'} />
+                     <div className={`font-ops text-sm md:text-lg tracking-widest ${isUrgent ? 'text-red-500' : 'text-cyan-400'}`}>00:{timeLeft.toString().padStart(2, '0')}</div>
                 </div>
             </div>
             <div className="relative">
@@ -45,15 +49,61 @@ export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, l
   const [showFeedback, setShowFeedback] = useState<'correct' | 'wrong' | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hiddenIndices, setHiddenIndices] = useState<number[]>([]);
   const [showScorePopup, setShowScorePopup] = useState(false);
   const [lastAddedScore, setLastAddedScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
 
   const currentQ = data[qIndex];
   const progress = ((qIndex) / data.length) * 100;
+  // Fix: Used ReturnType<typeof setInterval> instead of NodeJS.Timeout to fix "Cannot find namespace 'NodeJS'" error
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // --- TIMER LOGIC ---
+  useEffect(() => {
+    // Reset timer when question changes
+    setTimeLeft(60);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    if (!isTransitioning) {
+        timerRef.current = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    if (timerRef.current) clearInterval(timerRef.current);
+                    handleTimeOut();
+                    return 0;
+                }
+                const newTime = prev - 1;
+                // Play ticking sound
+                sfx.tick(newTime <= 10);
+                return newTime;
+            });
+        }, 1000);
+    }
+
+    return () => {
+        if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [qIndex, isTransitioning]);
+
+  const handleTimeOut = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setShowFeedback('wrong');
+    sfx.error();
+
+    const correctAnswerText = currentQ.options[currentQ.correctIndex];
+    onDamage({ question: currentQ.text + " (TIMEOUT)", correct: correctAnswerText });
+
+    setTimeout(() => {
+        if (qIndex < data.length - 1) {
+            setQIndex(prev => prev + 1);
+        } else {
+            onComplete(score);
+        }
+    }, 1500);
+  };
 
   useEffect(() => {
-    setHiddenIndices([]);
     setSelectedIndex(null);
     setShowFeedback(null);
     setIsTransitioning(false);
@@ -77,6 +127,9 @@ export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, l
   const handleAnswer = (index: number) => {
     if (isTransitioning) return;
     
+    // Stop timer
+    if (timerRef.current) clearInterval(timerRef.current);
+    
     // Trigger Audio
     sfx.click();
 
@@ -91,9 +144,12 @@ export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, l
       setShowFeedback('correct');
       sfx.hit(); 
       
-      const basePoints = user.difficulty === 'HARD' ? 300 : user.difficulty === 'MEDIUM' ? 200 : 100;
-      setScore(prev => prev + basePoints);
+      const difficultyMultiplier = user.difficulty === 'HARD' ? 300 : user.difficulty === 'MEDIUM' ? 200 : 100;
+      // Bonus points for speed
+      const timeBonus = Math.floor(timeLeft * 2);
+      const basePoints = difficultyMultiplier + timeBonus;
       
+      setScore(prev => prev + basePoints);
       setLastAddedScore(basePoints);
       setShowScorePopup(true);
 
@@ -126,9 +182,9 @@ export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, l
   if (!currentQ) return <div className="text-white text-center">Loading Data...</div>;
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between max-w-5xl mx-auto">
+    <div className={`relative w-full h-full flex flex-col justify-between max-w-5xl mx-auto transition-colors duration-300 ${timeLeft <= 10 && !isTransitioning ? 'timer-urgent' : ''}`}>
       <WeaponOverlay />
-      <TopRightHUD user={user} currentScore={score} />
+      <TopRightHUD user={user} currentScore={score} timeLeft={timeLeft} />
 
       {showScorePopup && (
          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-[60] animate-bounce pointer-events-none">
@@ -147,7 +203,7 @@ export const UniversalLevelEngine: React.FC<LevelEngineProps> = ({ data, user, l
               <div className="relative z-10 w-full">
                   <div className="flex justify-center mb-1 text-slate-400 items-center gap-2">
                        <Target size={12} className="animate-pulse" />
-                       <span className="font-mono text-[10px] md:text-xs tracking-widest">TARGET {qIndex + 1}/{data.length}</span>
+                       <span className="font-mono text-[10px] md:text-xs tracking-widest uppercase">TARGET {qIndex + 1}/{data.length}</span>
                   </div>
                   <h2 className="text-base md:text-3xl font-bold text-white leading-tight drop-shadow-md px-4">
                       {currentQ.text}
