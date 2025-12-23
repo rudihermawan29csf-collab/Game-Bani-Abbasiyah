@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { ScreenState, UserProfile, Difficulty, Question, GalleryItem } from './types';
+import { ScreenState, UserProfile, Difficulty, Question, GalleryItem, LevelType } from './types';
 import { 
   LEVEL_CONFIGS, CHARACTERS, GAME_DATA, RANDOM_BACKGROUNDS, GALLERY_DATA 
 } from './constants';
@@ -363,7 +362,7 @@ const DifficultySelectScreen = ({ onSelect, onGallery }: { onSelect: (diff: Diff
                              <GraduationCap className="text-cyan-400 mb-0 shrink-0" size={32} />
                              <div className="text-left md:text-center">
                                 <h3 className="text-lg md:text-xl font-ops text-cyan-400 uppercase">ADAB & SIKAP</h3>
-                                <p className="text-slate-400 text-[10px] md:text-xs mt-1 leading-tight">Nilai Karakter Abbasiyah dan implementasi karakter.</p>
+                                <p className="text-slate-400 text-[10px] md:text-xs mt-1 leading-tight">Misi Khusus: Al-Mujadilah 11 & Integrasi Karakter.</p>
                              </div>
                         </div>
                         <div className="hidden md:block bg-cyan-900/40 py-1.5 mt-3 text-center text-cyan-400 font-ops text-xs border border-cyan-700 uppercase">MULAI OPERASI</div>
@@ -512,6 +511,8 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete, bgImage }: { level
   const [isLevelFinished, setIsLevelFinished] = useState(false);
   const [finalGameScore, setFinalGameScore] = useState(0);
   const [randomizedData, setRandomizedData] = useState<Question[]>([]);
+  
+  const currentLevelConfig = LEVEL_CONFIGS.find(l => l.id === levelId);
 
   useEffect(() => {
     const rawData = GAME_DATA[user.difficulty][levelId] || [];
@@ -541,7 +542,16 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete, bgImage }: { level
                 <HealthBar hp={hp} maxHp={100} />
             </div>
             <div className="flex-grow p-0 md:p-4 overflow-hidden relative">
-                {randomizedData.length > 0 && <UniversalLevelEngine data={randomizedData} user={user} levelId={levelId} onComplete={handleLevelComplete} onDamage={handleDamage} />}
+                {randomizedData.length > 0 && (
+                    <UniversalLevelEngine 
+                        data={randomizedData} 
+                        user={user} 
+                        levelId={levelId} 
+                        levelType={currentLevelConfig?.type || LevelType.RAPID_FIRE}
+                        onComplete={handleLevelComplete} 
+                        onDamage={handleDamage} 
+                    />
+                )}
             </div>
           </div>
       </div>

@@ -32,113 +32,113 @@ export const CHARACTERS: Character[] = [
   }
 ];
 
-// Menggunakan Pollinations.ai untuk generate gambar sesuai konteks sejarah
-const getAIImage = (prompt: string) => `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", photorealistic, cinematic lighting, ancient islamic golden age, 8k, highly detailed, masterpiece, historical accuracy")}?width=1024&height=768&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
+// Menggunakan Pollinations.ai dengan SEED STATIS agar gambar dicache browser dan muncul instan
+const getAIImage = (prompt: string, seedId: string) => `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", photorealistic, cinematic lighting, ancient islamic golden age, 8k, highly detailed, masterpiece, historical accuracy")}?width=1024&height=768&nologo=true&seed=${seedId}`;
 
 export const GALLERY_DATA: GalleryItem[] = [
   {
     id: 'g1',
     title: 'Kota Bundar Baghdad',
     category: 'Arsitektur',
-    image: getAIImage('Aerial view of the Round City of Baghdad 8th century, circular walls, golden palace in center, tigris river, ancient architecture'),
+    image: getAIImage('Aerial view of the Round City of Baghdad 8th century, circular walls, golden palace in center, tigris river, ancient architecture', '101'),
     description: 'Baghdad dibangun oleh Khalifah Al-Mansyur dengan desain bundar revolusioner. Dikelilingi tembok berlapis dan parit, di tengahnya berdiri istana emas dan masjid agung, melambangkan pusat dunia yang tertata sempurna.'
   },
   {
     id: 'g2',
     title: 'Bayt al-Hikmah',
     category: 'Pusat Ilmu',
-    image: getAIImage('Interior of Bayt al-Hikmah library Baghdad, scholars translating scrolls, warm candle lighting, shelves full of ancient books, islamic architecture'),
+    image: getAIImage('Interior of Bayt al-Hikmah library Baghdad, scholars translating scrolls, warm candle lighting, shelves full of ancient books, islamic architecture', '102'),
     description: 'Rumah Kebijaksanaan adalah perpustakaan legendaris. Di sinilah karya Yunani, Persia, dan India diterjemahkan, memicu ledakan ilmu pengetahuan yang menerangi dunia saat Eropa masih dalam kegelapan.'
   },
   {
     id: 'g3',
     title: 'Al-Khawarizmi',
     category: 'Matematika',
-    image: getAIImage('Al-Khawarizmi persian mathematician working on algebra manuscript, ancient study room, sunlight beaming through window, wearing turban'),
+    image: getAIImage('Al-Khawarizmi persian mathematician working on algebra manuscript, ancient study room, sunlight beaming through window, wearing turban', '103'),
     description: 'Bapak Aljabar dan Algoritma. Karyanya "Al-Kitab al-Mukhtasar" menjadi dasar matematika modern. Tanpa penemuannya, teknologi komputer dan digital hari ini tidak akan pernah ada.'
   },
   {
     id: 'g4',
     title: 'Observatorium Shammasiya',
     category: 'Astronomi',
-    image: getAIImage('Ancient Islamic astronomers using astrolabe at night observatory in desert, starry sky, milky way, looking through large brass instruments'),
+    image: getAIImage('Ancient Islamic astronomers using astrolabe at night observatory in desert, starry sky, milky way, looking through large brass instruments', '104'),
     description: 'Bani Abbasiyah membangun observatorium canggih. Mereka mengukur keliling bumi dengan akurasi tinggi dan memetakan bintang untuk navigasi serta penentuan waktu ibadah yang presisi.'
   },
   {
     id: 'g5',
     title: 'Khalifah Harun Al-Rashid',
     category: 'Kepemimpinan',
-    image: getAIImage('Caliph Harun Al-Rashid sitting on ornate throne in Baghdad palace, receiving diplomatic gifts, luxurious silk robes, golden age atmosphere'),
+    image: getAIImage('Caliph Harun Al-Rashid sitting on ornate throne in Baghdad palace, receiving diplomatic gifts, luxurious silk robes, golden age atmosphere', '105'),
     description: 'Simbol masa keemasan. Pemerintahannya diwarnai kemakmuran dan hubungan diplomatik luas. Ia pernah mengirim hadiah jam air mekanik berupa gajah kepada Raja Charlemagne di Eropa.'
   },
   {
     id: 'g6',
     title: 'Ibnu Sina (Avicenna)',
     category: 'Kedokteran',
-    image: getAIImage('Ibn Sina examining a patient in ancient islamic hospital, holding medicine book, jars of herbs in background, scholarly look'),
+    image: getAIImage('Ibn Sina examining a patient in ancient islamic hospital, holding medicine book, jars of herbs in background, scholarly look', '106'),
     description: 'Pangeran Para Dokter. Bukunya "Al-Qanun fi al-Tibb" menjadi rujukan utama kedokteran dunia selama berabad-abad. Ia menekankan observasi klinis, karantina, dan eksperimen.'
   },
   {
     id: 'g7',
     title: 'Robotika Al-Jazari',
     category: 'Teknologi',
-    image: getAIImage('Al-Jazari elephant clock mechanical invention, detailed gears and water mechanism, ancient engineering blueprint style real life'),
+    image: getAIImage('Al-Jazari elephant clock mechanical invention, detailed gears and water mechanism, ancient engineering blueprint style real life', '107'),
     description: 'Insinyur jenius yang menciptakan mesin otomat, jam gajah, dan pompa air mekanis. Karyanya dalam kitab "Pengetahuan Ilmu Mekanik" meletakkan dasar bagi robotika modern.'
   },
   {
     id: 'g8',
     title: 'Revolusi Kertas',
     category: 'Industri',
-    image: getAIImage('Ancient paper mill in Baghdad, workers processing pulp, drying paper sheets, water wheel river background, industrial activity'),
+    image: getAIImage('Ancient paper mill in Baghdad, workers processing pulp, drying paper sheets, water wheel river background, industrial activity', '108'),
     description: 'Mengadopsi teknologi Tiongkok, Abbasiyah mendirikan pabrik kertas pertama. Kertas murah memicu revolusi literasi, membuat buku terjangkau dan ilmu menyebar cepat ke seluruh lapisan masyarakat.'
   },
   {
     id: 'g9',
     title: 'Sistem Irigasi Tigris',
     category: 'Pertanian',
-    image: getAIImage('Lush agricultural gardens in ancient Iraq, complex water channels irrigation system from Tigris river, farmers working, green landscape'),
+    image: getAIImage('Lush agricultural gardens in ancient Iraq, complex water channels irrigation system from Tigris river, farmers working, green landscape', '109'),
     description: 'Pertanian maju pesat berkat teknik irigasi canggih. Kanal-kanal raksasa mengubah gurun menjadi kebun subur yang menghasilkan kurma, kapas, dan buah-buahan untuk diekspor.'
   },
   {
     id: 'g10',
     title: 'Bimaristan (Rumah Sakit)',
     category: 'Kesehatan',
-    image: getAIImage('Courtyard of Bimaristan ancient hospital, fountain in center, patients resting, doctors walking, peaceful healing environment islamic architecture'),
+    image: getAIImage('Courtyard of Bimaristan ancient hospital, fountain in center, patients resting, doctors walking, peaceful healing environment islamic architecture', '110'),
     description: 'Rumah sakit modern pertama yang gratis. Pasien dirawat berdasarkan penyakit, bukan kekayaan. Terdapat bangsal khusus penyakit jiwa yang diterapi dengan musik dan suara air.'
   },
   {
     id: 'g11',
     title: 'Jabir bin Hayyan',
     category: 'Kimia',
-    image: getAIImage('Jabir ibn Hayyan alchemy laboratory, glass flasks, distillation apparatus, colored liquids, ancient chemistry experiment, smoke'),
+    image: getAIImage('Jabir ibn Hayyan alchemy laboratory, glass flasks, distillation apparatus, colored liquids, ancient chemistry experiment, smoke', '111'),
     description: 'Bapak Kimia modern. Ia mengubah alkimia mistis menjadi sains eksperimental. Menemukan asam sulfat, klorida, dan teknik distilasi kristalisasi yang dipakai di laboratorium hingga kini.'
   },
   {
     id: 'g12',
     title: 'Pasar Dunia Baghdad',
     category: 'Ekonomi',
-    image: getAIImage('Bustling ancient Baghdad bazaar market, traders with camels, spices, silk fabrics, diverse people, vibrant colors, sunset'),
+    image: getAIImage('Bustling ancient Baghdad bazaar market, traders with camels, spices, silk fabrics, diverse people, vibrant colors, sunset', '112'),
     description: 'Pusat perdagangan global. Sutra Cina, rempah India, dan bulu Rusia bertemu di sini. Pedagang menggunakan sistem cek (sakk) untuk transaksi aman tanpa membawa emas berat.'
   },
   {
     id: 'g13',
     title: 'Seni Kaligrafi',
     category: 'Kesenian',
-    image: getAIImage('Master calligrapher writing Arabic script with bamboo pen and gold ink, close up on parchment, geometric precision, spiritual atmosphere'),
+    image: getAIImage('Master calligrapher writing Arabic script with bamboo pen and gold ink, close up on parchment, geometric precision, spiritual atmosphere', '113'),
     description: 'Seni menulis indah mencapai puncaknya. Ibnu Muqlah merumuskan aturan geometris kaligrafi, menjadikan tulisan bukan sekadar alat komunikasi, tapi ekspresi spiritual yang memukau.'
   },
   {
     id: 'g14',
     title: 'Harmoni & Toleransi',
     category: 'Sosial',
-    image: getAIImage('Diverse group of scholars muslim christian jewish discussing in Baghdad garden, peaceful coexistence, ancient clothes, interfaith harmony'),
+    image: getAIImage('Diverse group of scholars muslim christian jewish discussing in Baghdad garden, peaceful coexistence, ancient clothes, interfaith harmony', '114'),
     description: 'Masyarakat Baghdad sangat majemuk. Muslim, Kristen, Yahudi, dan Zoroaster hidup berdampingan. Banyak ilmuwan non-Muslim memegang posisi penting di istana dan lembaga riset.'
   },
   {
     id: 'g15',
     title: 'Jalur Sutra & Diplomasi',
     category: 'Politik',
-    image: getAIImage('Caravan traveling on Silk Road desert, ancient map background, diplomatic envoys exchanging scrolls, sunset horizon'),
+    image: getAIImage('Caravan traveling on Silk Road desert, ancient map background, diplomatic envoys exchanging scrolls, sunset horizon', '115'),
     description: 'Abbasiyah menjamin keamanan Jalur Sutra, menghubungkan Timur dan Barat. Pertukaran budaya dan teknologi mengalir deras, menjadikan Islam sebagai jembatan peradaban dunia.'
   }
 ];
@@ -163,19 +163,19 @@ const BG_ABBASSID = "https://iili.io/fcTZCa2.jpg";
 export const LEVEL_CONFIGS: LevelConfig[] = [
   {
     id: 1,
-    title: "SEMANGAT LITERASI",
-    subtitle: "Pewaris Bayt al-Hikmah",
-    type: LevelType.RAPID_FIRE,
-    description: "Terapkan semangat cinta ilmu para ilmuwan Baghdad dalam kebiasaan belajarmu.",
+    title: "OPERASI AL-MUJADILAH",
+    subtitle: "Menyusun Wahyu",
+    type: LevelType.VERSE_ASSEMBLE,
+    description: "Susun kembali potongan ayat Q.S. Al-Mujadilah ayat 11 dengan urutan yang sempurna.",
     maxScore: 1000,
     image: BG_ABBASSID 
   },
   {
     id: 2,
-    title: "ADAB MENUNTUT ILMU",
-    subtitle: "Etika Pelajar Mulia",
-    type: LevelType.RAPID_FIRE,
-    description: "Bagaimana sikapmu terhadap guru dan teman sebagai bentuk penghormatan pada ilmu?",
+    title: "KODE ETIK BAHASA",
+    subtitle: "Makna Per Kata",
+    type: LevelType.VOCAB_MATCH,
+    description: "Identifikasi arti setiap kata kunci dalam ayat untuk membuka pemahaman mendalam.",
     maxScore: 1000,
     image: BG_ABBASSID 
   },
@@ -384,18 +384,14 @@ export const GAME_DATA: GameData = {
   },
   [Difficulty.ETHICS]: {
     1: [
-      { id: 'eth1-1', text: "Dalam Q.S. Al-Mujadilah: 11, Allah akan meninggikan derajat orang yang...", options: ["Beriman & Berilmu", "Kaya & Kuat", "Tampan & Populer", "Berkuasa & Ditakuti"], correctIndex: 0 },
-      { id: 'eth1-2', text: "Sikap 'melapangkan majelis' dalam ayat tersebut mengajarkan...", options: ["Kepedulian Sosial", "Egoisme", "Kompetisi", "Kekuasaan"], correctIndex: 0 },
-      { id: 'eth1-3', text: "Ilmuwan Abbasiyah belajar siang malam. Nilai yang diambil adalah...", options: ["Kerja Keras", "Santai", "Pasrah", "Tidur"], correctIndex: 0 },
-      { id: 'eth1-4', text: "Menghormati guru seperti Imam Malik kepada gurunya adalah cermin...", options: ["Adab Penuntut Ilmu", "Pencitraan", "Ketakutan", "Kelemahan"], correctIndex: 0 },
-      { id: 'eth1-5', text: "Ilmu tanpa iman menurut karakter Abbasiyah akan menjadi...", options: ["Bencana", "Kekuatan", "Harta", "Kebanggaan"], correctIndex: 0 }
+      { id: 'eth1-1', text: "Susun ayat Al-Mujadilah: 11 dengan benar:", options: ["Yarfa'i Allāhu", "alladhīna āmanū", "minkum", "walladhīna ūtū", "al-'ilma darajāt"], correctIndex: 0 },
     ],
     2: [
-      { id: 'eth2-1', text: "Khalifah Harun al-Rashid sering menangis mendengar nasehat ulama. Ini menunjukkan...", options: ["Kelembutan Hati", "Kelemahan Mental", "Sandiwara", "Ketakutan"], correctIndex: 0 },
-      { id: 'eth2-2', text: "Bayt al-Hikmah menerima buku dari berbagai bangsa. Sikap ini adalah...", options: ["Terbuka & Inklusif", "Meniru Buta", "Menjajah", "Mencuri"], correctIndex: 0 },
-      { id: 'eth2-3', text: "Penerjemah Kristen dihormati di istana. Ini bukti nilai...", options: ["Toleransi", "Sinkretisme", "Kelemahan Iman", "Politik Uang"], correctIndex: 0 },
-      { id: 'eth2-4', text: "Para ilmuwan menulis ribuan buku. Sikap produktif ini disebut...", options: ["Etos Kerja Tinggi", "Buang Waktu", "Cari Muka", "Ambisius"], correctIndex: 0 },
-      { id: 'eth2-5', text: "Ibnu Sina merawat orang miskin secara gratis. Ini adalah nilai...", options: ["Kemanusiaan", "Bisnis", "Iklan", "Politik"], correctIndex: 0 }
+      { id: 'eth2-1', text: "Apa arti dari lafadz 'Yarfa'u'?", options: ["Meninggikan/Mengangkat", "Menjatuhkan", "Melihat", "Mendengar"], correctIndex: 0 },
+      { id: 'eth2-2', text: "Lafadz 'alladhīna āmanū' memiliki arti...", options: ["Orang-orang yang beriman", "Orang-orang kafir", "Orang-orang munafik", "Orang-orang berilmu"], correctIndex: 0 },
+      { id: 'eth2-3', text: "Arti kata 'minkum' dalam ayat tersebut adalah...", options: ["Di antara kamu", "Dari mereka", "Di antara kita", "Dari golongan jin"], correctIndex: 0 },
+      { id: 'eth2-4', text: "Potongan ayat 'walladhīna ūtū al-'ilma' bermakna...", options: ["Dan orang-orang yang diberi ilmu", "Dan orang-orang yang sholat", "Dan orang-orang yang zakat", "Dan orang-orang yang berjihad"], correctIndex: 0 },
+      { id: 'eth2-5', text: "Kata 'darajāt' menunjukkan...", options: ["Beberapa derajat/tingkatan", "Satu tingkatan", "Surga Firdaus", "Pahala besar"], correctIndex: 0 }
     ],
     3: [
       { id: 'eth3-1', text: "Jika temanmu kesulitan memahami pelajaran, sikap sesuai Al-Mujadilah 11 adalah...", options: ["Membantunya Belajar", "Mengejeknya", "Membiarkannya", "Pamer Nilai"], correctIndex: 0 },
