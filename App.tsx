@@ -940,7 +940,7 @@ const App = () => {
         />
       )}
 
-      <GlobalFooter />
+      {screen !== ScreenState.TITLE && <GlobalFooter />}
     </>
   );
 };
