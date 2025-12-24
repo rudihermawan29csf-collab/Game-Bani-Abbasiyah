@@ -6,7 +6,7 @@ import {
 } from './constants';
 import { TacticalButton, Panel, RankBadge, HealthBar } from './components/UI';
 import { UniversalLevelEngine } from './components/GameLevels';
-import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquareQuote } from 'lucide-react';
+import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquare } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sfx } from './audio';
 
@@ -759,7 +759,7 @@ const EvaluationScreen = ({ score, percentage, isSuccess, onContinue, onRetry }:
                     {/* COMMANDER NOTE SECTION */}
                     <div className={`p-4 border-l-4 ${isSuccess ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'} relative mt-2`}>
                         <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] font-bold font-ops uppercase tracking-widest border border-slate-200 text-slate-500 flex items-center gap-1">
-                             <MessageSquareQuote size={12} /> COMMANDER'S NOTE
+                             <MessageSquare size={12} /> COMMANDER'S NOTE
                         </div>
                         <p className={`font-serif italic text-sm md:text-lg leading-relaxed ${isSuccess ? 'text-green-800' : 'text-red-800'}`}>
                             "{message}"
