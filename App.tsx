@@ -6,7 +6,7 @@ import {
 } from './constants';
 import { TacticalButton, Panel, RankBadge, HealthBar } from './components/UI';
 import { UniversalLevelEngine } from './components/GameLevels';
-import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquare } from 'lucide-react';
+import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquare, Trophy, Home } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sfx } from './audio';
 
@@ -472,8 +472,11 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
         { x: 15, y: 75 }, { x: 30, y: 50 }, { x: 20, y: 25 }, { x: 50, y: 15 }, { x: 80, y: 25 }, { x: 70, y: 55 }, { x: 85, y: 80 }
     ];
 
+    // Check if campaign is fully complete
+    const isCampaignComplete = user.levelProgress >= LEVEL_CONFIGS.length;
+
     return (
-        <div className="h-[100dvh] w-full bg-slate-950 flex flex-col overflow-hidden">
+        <div className="h-[100dvh] w-full bg-slate-950 flex flex-col overflow-hidden relative">
             <div className="bg-black/90 px-4 py-2 border-b border-slate-700 flex justify-between items-center z-50 shadow-xl h-14 md:h-16 shrink-0 pt-safe">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 md:w-10 md:h-10 border-2 border-yellow-500 p-0.5 bg-slate-800">
@@ -492,6 +495,7 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                     <span className="font-ops text-xs uppercase hidden md:inline">Putus Kontak</span>
                 </button>
             </div>
+            
             <div className="flex-grow relative w-full overflow-hidden bg-slate-900">
                 <div className="absolute inset-0 bg-cover bg-center opacity-30 brightness-50" style={{ backgroundImage: "url('https://iili.io/fcuagyJ.jpg')" }}></div>
                 <svg className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-visible">
@@ -520,6 +524,23 @@ const MapScreen = ({ user, onLogout, onStartLevel }: { user: UserProfile, onLogo
                     })}
                 </div>
             </div>
+
+            {/* Campaign Complete Overlay */}
+            {isCampaignComplete && (
+                <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-500">
+                    <div className="bg-gradient-to-br from-yellow-900/90 to-black border-2 border-yellow-500 p-8 rounded-lg text-center max-w-md w-full mx-4 shadow-[0_0_50px_rgba(234,179,8,0.5)]">
+                        <Trophy className="mx-auto text-yellow-500 w-24 h-24 mb-4 animate-bounce" />
+                        <h2 className="text-3xl md:text-5xl font-ops text-white mb-2 uppercase text-fire">CAMPAIGN COMPLETE</h2>
+                        <p className="text-yellow-200 font-mono mb-6">Seluruh data sejarah Bani Abbasiyah telah diamankan. Kerja bagus, Agen.</p>
+                        <div className="flex flex-col gap-3">
+                            <button onClick={() => { sfx.click(); onLogout(); }} className="bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded uppercase font-ops flex items-center justify-center gap-2">
+                                <Home size={20} /> Kembali ke Markas
+                            </button>
+                            <p className="text-xs text-slate-400 mt-2">Anda dapat memutar ulang level mana pun di peta.</p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -693,7 +714,7 @@ const GameplayScreen = ({ levelId, user, onAbort, onComplete, bgImage }: { level
 };
 
 // --- RESTORED EVALUATION SCREEN (INTEL REPORT STYLE) ---
-const EvaluationScreen = ({ score, percentage, isSuccess, onContinue, onRetry }: { score: number, percentage: number, isSuccess: boolean, onContinue: () => void, onRetry: () => void }) => {
+const EvaluationScreen = ({ score, percentage, isSuccess, isLastLevel, onContinue, onRetry }: { score: number, percentage: number, isSuccess: boolean, isLastLevel: boolean, onContinue: () => void, onRetry: () => void }) => {
     // Pesan Motivasi untuk yang Gagal
     const FAILURE_QUOTES = [
         "Kegagalan adalah guru terbaik. Analisis kesalahanmu dan bangkit kembali.",
@@ -775,7 +796,15 @@ const EvaluationScreen = ({ score, percentage, isSuccess, onContinue, onRetry }:
                 <div className="mt-2 pt-4 border-t-2 border-black flex justify-center z-10">
                     {isSuccess ? (
                         <button onClick={() => { sfx.click(); onContinue(); }} className="bg-black text-white font-ops text-lg md:text-xl px-6 md:px-8 py-3 hover:bg-slate-800 transition-colors uppercase tracking-widest flex items-center gap-2 w-full md:w-auto justify-center shadow-lg hover:shadow-xl hover:-translate-y-1">
-                            <FileCheck size={20} /> File & Continue
+                            {isLastLevel ? (
+                                <>
+                                    <Trophy size={20} className="text-yellow-400" /> MISSION ACCOMPLISHED - RETURN TO BASE
+                                </>
+                            ) : (
+                                <>
+                                    <FileCheck size={20} /> File & Continue
+                                </>
+                            )}
                         </button>
                     ) : (
                         <button onClick={() => { sfx.click(); onRetry(); }} className="bg-red-700 text-white font-ops text-lg md:text-xl px-6 md:px-8 py-3 hover:bg-red-800 transition-colors uppercase tracking-widest flex items-center gap-2 w-full md:w-auto justify-center shadow-lg hover:shadow-xl hover:-translate-y-1">
@@ -930,6 +959,7 @@ const App = () => {
           // Pass the pre-calculated strict percentage
           percentage={Math.min(100, Math.round((gameResult.score / ((GAME_DATA[user.difficulty][currentLevelId]?.length || 5) * 20)) * 100))}
           isSuccess={gameResult.isSuccess}
+          isLastLevel={currentLevelId === LEVEL_CONFIGS.length}
           onContinue={() => {
             sfx.stopBGM();
             setScreen(ScreenState.MAP);
