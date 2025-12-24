@@ -6,7 +6,7 @@ import {
 } from './constants';
 import { TacticalButton, Panel, RankBadge, HealthBar } from './components/UI';
 import { UniversalLevelEngine } from './components/GameLevels';
-import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquare, Trophy, Home } from 'lucide-react';
+import { Shield, ChevronLeft, Star, Award, Lock, Play, Skull, ScrollText, Target, Crosshair, Swords, Brain, Zap, Loader2, RefreshCw, Radio, FileText, ChevronRight, GraduationCap, Image as ImageIcon, Volume2, Pause, SkipForward, SkipBack, Info, Fingerprint, FileCheck, CheckCircle2, School, MousePointer2, Clock, AlertTriangle, XCircle, RotateCcw, MessageSquare, Trophy, Home, DoorOpen, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sfx } from './audio';
 
@@ -143,6 +143,94 @@ const GalleryScreen = ({ onBack }: { onBack: () => void }) => {
 };
 
 // --- SUB-COMPONENTS ---
+
+// NEW VICTORY GATE COMPONENT
+const VictoryGate = ({ onContinue }: { onContinue: () => void }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [showContent, setShowContent] = useState(false);
+
+    useEffect(() => {
+        // Start sequence
+        const timer1 = setTimeout(() => setIsOpen(true), 1000);
+        const timer2 = setTimeout(() => {
+            setShowContent(true);
+            confetti({
+                particleCount: 300,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#fbbf24', '#f59e0b', '#d97706', '#ffffff']
+            });
+            sfx.win();
+        }, 2500);
+
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        };
+    }, []);
+
+    return (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-black">
+            {/* Background Light (Revealed when doors open) */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-200 via-yellow-600 to-black z-0 flex flex-col items-center justify-center text-center p-6">
+                 {/* Victory Content */}
+                 <div className={`transition-all duration-1000 transform ${showContent ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-90'}`}>
+                      <Trophy className="w-24 h-24 md:w-32 md:h-32 text-yellow-900 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-bounce" fill="currentColor" />
+                      
+                      <h1 className="text-4xl md:text-7xl font-ops text-white mb-2 uppercase drop-shadow-xl tracking-widest text-stroke-gold">
+                          KEJAYAAN
+                      </h1>
+                      <div className="h-1 w-32 bg-white mx-auto mb-6 shadow-[0_0_10px_white]"></div>
+                      
+                      <div className="max-w-2xl mx-auto bg-black/60 backdrop-blur-sm p-6 md:p-8 border-y-2 border-yellow-400 mb-8 rounded-xl">
+                          <p className="font-serif italic text-lg md:text-2xl text-yellow-100 leading-relaxed">
+                              "Sejarah bukan sekadar masa lalu, tapi pelita untuk masa depan. Dengan menyelesaikan misi ini, engkau telah membuktikan bahwa semangat keilmuan Bani Abbasiyah kini hidup kembali dalam dirimu."
+                          </p>
+                      </div>
+
+                      <button 
+                        onClick={onContinue}
+                        className="group relative px-8 py-4 bg-yellow-500 text-black font-ops text-xl uppercase tracking-widest hover:bg-yellow-400 transition-all hover:scale-105 shadow-[0_0_30px_rgba(234,179,8,0.6)] rounded-lg overflow-hidden"
+                      >
+                          <span className="relative z-10 flex items-center gap-2">
+                             <Award size={24} /> TERIMA PENGHARGAAN
+                          </span>
+                          <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                      </button>
+                 </div>
+            </div>
+
+            {/* Left Door */}
+            <div 
+                className={`absolute top-0 left-0 w-1/2 h-full bg-slate-900 z-10 transition-transform duration-[2000ms] ease-in-out flex items-center justify-end border-r-4 border-yellow-600 shadow-2xl ${isOpen ? '-translate-x-full' : 'translate-x-0'}`}
+                style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/arabesque.png')" }}
+            >
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+                <div className="mr-8 md:mr-16">
+                     <div className="w-24 h-24 md:w-48 md:h-48 rounded-full border-4 border-yellow-600/50 flex items-center justify-center opacity-50">
+                        <Star size={40} className="text-yellow-600" />
+                     </div>
+                </div>
+            </div>
+
+            {/* Right Door */}
+            <div 
+                className={`absolute top-0 right-0 w-1/2 h-full bg-slate-900 z-10 transition-transform duration-[2000ms] ease-in-out flex items-center justify-start border-l-4 border-yellow-600 shadow-2xl ${isOpen ? 'translate-x-full' : 'translate-x-0'}`}
+                style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/arabesque.png')" }}
+            >
+                <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+                <div className="ml-8 md:ml-16">
+                     <div className="w-24 h-24 md:w-48 md:h-48 rounded-full border-4 border-yellow-600/50 flex items-center justify-center opacity-50">
+                        <Star size={40} className="text-yellow-600" />
+                     </div>
+                </div>
+            </div>
+
+            {/* Door Joint Light Leak */}
+            <div className={`absolute inset-y-0 left-1/2 w-1 bg-yellow-400 z-20 shadow-[0_0_100px_50px_rgba(250,204,21,0.5)] transition-opacity duration-500 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
+        </div>
+    );
+};
 
 const TitleScreen = ({ onStart }: { onStart: () => void }) => {
   return (
@@ -832,6 +920,7 @@ const App = () => {
   });
   const [currentLevelId, setCurrentLevelId] = useState(1);
   const [gameResult, setGameResult] = useState<{score: number, hp: number, isSuccess: boolean} | null>(null);
+  const [showVictoryGate, setShowVictoryGate] = useState(false);
 
   const calculateRank = (score: number) => {
       if (score > 8000) return "CENDEKIAWAN UTAMA";
@@ -866,12 +955,16 @@ const App = () => {
     
     if (effectiveSuccess) {
       if (currentLevelId === LEVEL_CONFIGS.length) {
-        confetti({
-          particleCount: 200,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#fbbf24', '#f59e0b', '#d97706']
-        });
+        // Confetti handled inside VictoryGate now for better timing
+      } else {
+         if (currentLevelId === LEVEL_CONFIGS.length) {
+            confetti({
+              particleCount: 200,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: ['#fbbf24', '#f59e0b', '#d97706']
+            });
+         }
       }
 
       setUser(prev => ({
@@ -882,12 +975,25 @@ const App = () => {
         rank: calculateRank(prev.score + finalScore)
       }));
     }
-    setScreen(ScreenState.EVALUATION);
+
+    // CHECK FOR FINAL VICTORY CONDITION
+    if (effectiveSuccess && currentLevelId === LEVEL_CONFIGS.length) {
+        setShowVictoryGate(true);
+    } else {
+        setScreen(ScreenState.EVALUATION);
+    }
   };
 
   return (
     <>
       <BackgroundPreloader />
+      
+      {showVictoryGate && (
+          <VictoryGate onContinue={() => {
+              setShowVictoryGate(false);
+              setScreen(ScreenState.EVALUATION);
+          }} />
+      )}
       
       {screen === ScreenState.TITLE && <TitleScreen onStart={() => setScreen(ScreenState.LOGIN)} />}
       
@@ -953,7 +1059,7 @@ const App = () => {
         />
       )}
       
-      {screen === ScreenState.EVALUATION && gameResult && (
+      {screen === ScreenState.EVALUATION && gameResult && !showVictoryGate && (
         <EvaluationScreen 
           score={gameResult.score}
           // Pass the pre-calculated strict percentage
@@ -976,3 +1082,4 @@ const App = () => {
 };
 
 export default App;
+    
